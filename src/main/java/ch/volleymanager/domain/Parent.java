@@ -1,18 +1,28 @@
 package ch.volleymanager.domain;
 
 public class Parent {
+    private long id;
     private String firstNameParent;
     private String lastNameParent;
     private String emailaddressParent;
-    private String mobileParent;
+    private String mobileNumberParent;
     private Person person;
 
-    public Parent(String firstNameParent, String lastNameParent, String emailaddressParent, String mobileParent, Person person) {
+    public Parent(long id, String firstNameParent, String lastNameParent, String emailaddressParent, String mobileNumberParent, Person person) {
+        this.id = id;
         this.firstNameParent = firstNameParent;
         this.lastNameParent = lastNameParent;
         this.emailaddressParent = emailaddressParent;
-        this.mobileParent = mobileParent;
+        this.mobileNumberParent = mobileNumberParent;
         this.person = person;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId() {
+        this.id = id;
     }
 
     public String getFirstNameParent() {
@@ -39,12 +49,12 @@ public class Parent {
         this.emailaddressParent = emailaddressParent;
     }
 
-    public String getMobileParent() {
-        return mobileParent;
+    public String getMobileNumberParent() {
+        return mobileNumberParent;
     }
 
-    public void setMobileParent(String mobileParent) {
-        this.mobileParent = mobileParent;
+    public void setMobileNumberParent(String mobileNumberParent) {
+        this.mobileNumberParent = mobileNumberParent;
     }
 
     public Person getPerson() {
@@ -53,5 +63,17 @@ public class Parent {
 
     public void setPerson(Person person) {
         this.person = person;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Parent{" +
+                "id=" + id +
+                ", vorname Elternteil='" + firstNameParent + '\'' +
+                ", nachname Elternteil='" + lastNameParent + '\'' +
+                ", email Elternteil='" + emailaddressParent + '\'' +
+                ", mobile Elternteil='" + mobileNumberParent + '\'' +
+                '}';
     }
 }

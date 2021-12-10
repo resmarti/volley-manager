@@ -1,6 +1,7 @@
 package ch.volleymanager.domain;
 
 public class Event {
+    private long eventId;
     private String eventName;
     private String eventDate;
     private String eventJob;
@@ -9,8 +10,9 @@ public class Event {
     private boolean numberOfHelpersOK;
     private Person person;
 
-    public Event(String eventName, String eventDate, String eventJob, String eventLocation, int numberOfHelpersNeeded,
+    public Event(long eventId, String eventName, String eventDate, String eventJob, String eventLocation, int numberOfHelpersNeeded,
                  boolean numberOfHelpersOK, Person person) {
+        this.eventId=eventId;
         this.eventName = eventName;
         this.eventDate = eventDate;
         this.eventJob = eventJob;
@@ -18,6 +20,14 @@ public class Event {
         this.numberOfHelpersNeeded = numberOfHelpersNeeded;
         this.numberOfHelpersOK = numberOfHelpersOK;
         this.person = person;
+    }
+
+    public long getEventId(){
+        return eventId;
+    }
+
+    public void setEventId(long eventId){
+        this.eventId=eventId;
     }
 
     public String getEventName() {
@@ -75,4 +85,6 @@ public class Event {
     public void setPerson(Person person) {
         this.person = person;
     }
+
+
 }
