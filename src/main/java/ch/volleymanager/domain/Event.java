@@ -86,5 +86,15 @@ public class Event {
         this.person = person;
     }
 
+    @Override
+    public String toString() {
+        return "Event{" +
+                "Event ID=" + eventId +
+                ", Event Name='" + eventName + '\'' +
+                ", Event Datum ='" + eventDate + '\'' +
+                ", Event Job='" + eventJob + '\'' +
+                ", Event Location='" + eventLocation + '\'' +
+                '}';
+    }
 
 }

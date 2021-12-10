@@ -18,16 +18,16 @@ public class Person implements Serializable {
     private int streetNb;
     private int postalCode;
     private String location;
-    private boolean player;
-    private boolean trainer;
-    private boolean admin;
+    private boolean isPlayer;
+    private boolean isTrainer;
+    private boolean isAdmin;
     private String imageUrl;
 
-    public Person() {}
+    public Person(){}
 
     public Person(String firstName, String lastName, String dateOfBirth, String emailaddressPlayer,
                   String mobileNumberPlayer, String street, int streetNb, int postalCode,
-                  String location, boolean player, boolean trainer, boolean admin, String imageUrl){
+                  String location, boolean isPlayer, boolean isTrainer, boolean isAdmin, String imageUrl){
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
@@ -37,9 +37,9 @@ public class Person implements Serializable {
         this.streetNb = streetNb;
         this.postalCode= postalCode;
         this.location = location;
-        this.player = player;
-        this.trainer = trainer;
-        this.admin = admin;
+        this.isPlayer = isPlayer;
+        this.isTrainer = isTrainer;
+        this.isAdmin = isAdmin;
         this.imageUrl = imageUrl;
     }
 
@@ -121,28 +121,28 @@ public class Person implements Serializable {
         this.mobileNumberPlayer = mobileNumberPlayer;
     }
 
-    public boolean isPlayer() {
-        return player;
+    public boolean GetIsPlayer() {
+        return isPlayer;
     }
 
-    public void setPlayer(boolean player) {
-        this.player = player;
+    public void setPlayer(boolean isPlayer) {
+        this.isPlayer = isPlayer;
     }
 
-    public boolean isTrainer() {
-        return trainer;
+    public boolean GetIsTrainer() {
+        return isTrainer;
     }
 
-    public void setTrainer(boolean trainer) {
-        this.trainer = trainer;
+    public void setIsTrainer(boolean isTrainer) {
+        this.isTrainer = isTrainer;
     }
 
-    public boolean isAdmin() {
-        return admin;
+    public boolean getIsAdmin() {
+        return isAdmin;
     }
 
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
+    public void setIsAdmin(boolean admin) {
+        this.isAdmin = isAdmin;
     }
 
     public String getImageUrl() {
@@ -153,20 +153,20 @@ public class Person implements Serializable {
         this.imageUrl = imageUrl;
     }
 
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", vorname='" + firstName + '\'' +
-                ", nachname='" + lastName + '\'' +
-                ", geburtsdatum='" + dateOfBirth + '\'' +
-                ", email='" + emailaddressPlayer + '\'' +
-                ", mobil='" + mobileNumberPlayer + '\'' +
-                ", Address='" + street + streetNb + postalCode + location + '\'' +
-                ", spieler=" + player +
-                ", trainer=" + trainer +
-                ", admin=" + admin +
-                ", imageUrl='" + imageUrl + '\'' +
-                '}';
-    }
+        @Override
+        public String toString() {
+            return "Person{" +
+                    "id=" + id +
+                    ", vorname='" + firstName + '\'' +
+                    ", nachname='" + lastName + '\'' +
+                    ", geburtsdatum='" + dateOfBirth + '\'' +
+                    ", email='" + emailaddressPlayer + '\'' +
+                    ", mobil='" + mobileNumberPlayer + '\'' +
+                    ", Address='" + street + streetNb + postalCode + location + '\'' +
+                    ", spieler=" + isPlayer +
+                    ", trainer=" + isTrainer +
+                    ", admin=" + isAdmin +
+                    ", imageUrl='" + imageUrl + '\'' +
+                    '}';
+        }
 }
