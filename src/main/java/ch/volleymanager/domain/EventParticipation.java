@@ -1,5 +1,8 @@
 package ch.volleymanager.domain;
 
+import javax.persistence.Entity;
+
+@Entity
 public class EventParticipation {
     private boolean hasParticipated;
     private Person person;

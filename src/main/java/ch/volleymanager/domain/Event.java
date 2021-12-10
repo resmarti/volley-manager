@@ -1,5 +1,8 @@
 package ch.volleymanager.domain;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Event {
     private long eventId;
     private String eventName;
