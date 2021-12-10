@@ -9,25 +9,35 @@ public class Person implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
     private Long id;
-    private String vorname;
-    private String nachname;
-    private String geburtsdatum;
-    private String email;
-    private String mobil;
-    private boolean spieler;
+    private String firstName;
+    private String lastName;
+    private String dateOfBirth;
+    private String emailaddressPlayer;
+    private String mobileNumberPlayer;
+    private String street;
+    private int streetNb;
+    private int postalCode;
+    private String location;
+    private boolean player;
     private boolean trainer;
     private boolean admin;
     private String imageUrl;
 
     public Person() {}
 
-    public Person(String vorname, String nachname, String geburtsdatum, String email, String mobil, boolean spieler, boolean trainer, boolean admin, String imageUrl) {
-        this.vorname = vorname;
-        this.nachname = nachname;
-        this.geburtsdatum = geburtsdatum;
-        this.email = email;
-        this.mobil = mobil;
-        this.spieler = spieler;
+    public Person(String firstName, String lastName, String dateOfBirth, String emailaddressPlayer,
+                  String mobileNumberPlayer, String street, int streetNb, int postalCode,
+                  String location, boolean player, boolean trainer, boolean admin, String imageUrl){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.emailaddressPlayer = emailaddressPlayer;
+        this.mobileNumberPlayer = mobileNumberPlayer;
+        this.street = street;
+        this.streetNb = streetNb;
+        this.postalCode= postalCode;
+        this.location = location;
+        this.player = player;
         this.trainer = trainer;
         this.admin = admin;
         this.imageUrl = imageUrl;
@@ -41,52 +51,82 @@ public class Person implements Serializable {
         this.id = id;
     }
 
-    public String getVorname() {
-        return vorname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setVorname(String vorname) {
-        this.vorname = vorname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getNachname() {
-        return nachname;
+    public String getLastName() { return lastName;    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public void setNachname(String nachname) {
-        this.nachname = nachname;
+    public String getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public String getGeburtsdatum() {
-        return geburtsdatum;
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
-    public void setGeburtsdatum(String geburtsdatum) {
-        this.geburtsdatum = geburtsdatum;
+    public String getEmailaddressPlayer() {
+        return emailaddressPlayer;
     }
 
-    public String getEmail() {
-        return email;
+    public void setEmailaddressPlayer(String emailaddressPlayer) {
+        this.emailaddressPlayer = emailaddressPlayer;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getStreet() {
+        return street;
     }
 
-    public String getMobil() {
-        return mobil;
+    public void setStreet(String street) {
+        this.street = street;
     }
 
-    public void setMobil(String mobil) {
-        this.mobil = mobil;
+    public int getStreetNb() {
+        return streetNb;
     }
 
-    public boolean isSpieler() {
-        return spieler;
+    public void setStreetNb(int streetNb) {
+        this.streetNb = streetNb;
     }
 
-    public void setSpieler(boolean spieler) {
-        this.spieler = spieler;
+    public int getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(int postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getMobileNumberPlayer() {
+        return mobileNumberPlayer;
+    }
+
+    public void setMobil(String mobileNumberPlayer) {
+        this.mobileNumberPlayer = mobileNumberPlayer;
+    }
+
+    public boolean isPlayer() {
+        return player;
+    }
+
+    public void setPlayer(boolean player) {
+        this.player = player;
     }
 
     public boolean isTrainer() {
@@ -117,12 +157,13 @@ public class Person implements Serializable {
     public String toString() {
         return "Person{" +
                 "id=" + id +
-                ", vorname='" + vorname + '\'' +
-                ", nachname='" + nachname + '\'' +
-                ", geburtsdatum='" + geburtsdatum + '\'' +
-                ", email='" + email + '\'' +
-                ", mobil='" + mobil + '\'' +
-                ", spieler=" + spieler +
+                ", vorname='" + firstName + '\'' +
+                ", nachname='" + lastName + '\'' +
+                ", geburtsdatum='" + dateOfBirth + '\'' +
+                ", email='" + emailaddressPlayer + '\'' +
+                ", mobil='" + mobileNumberPlayer + '\'' +
+                ", Address='" + street + streetNb + postalCode + location + '\'' +
+                ", spieler=" + player +
                 ", trainer=" + trainer +
                 ", admin=" + admin +
                 ", imageUrl='" + imageUrl + '\'' +
