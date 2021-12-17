@@ -81,9 +81,7 @@ public class Person implements Serializable {
         this.emailaddressPlayer = emailaddressPlayer;
     }
 
-    public String getStreet() {
-        return street;
-    }
+    public String getStreet() { return street; }
 
     public void setStreet(String street) {
         this.street = street;
@@ -121,7 +119,7 @@ public class Person implements Serializable {
         this.mobileNumberPlayer = mobileNumberPlayer;
     }
 
-    public boolean GetIsPlayer() {
+    public boolean getIsPlayer() {
         return isPlayer;
     }
 
@@ -129,7 +127,7 @@ public class Person implements Serializable {
         this.isPlayer = isPlayer;
     }
 
-    public boolean GetIsTrainer() {
+    public boolean getIsTrainer() {
         return isTrainer;
     }
 
