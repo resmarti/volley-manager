@@ -12,10 +12,11 @@ public class Person implements Serializable {
     private String firstName;
     private String lastName;
     private String dateOfBirth;
+    private String gender;
     private String emailaddressPlayer;
     private String mobileNumberPlayer;
     private String street;
-    private int streetNb;
+    private String streetNb;
     private int postalCode;
     private String location;
     private boolean isPlayer;
@@ -25,12 +26,13 @@ public class Person implements Serializable {
 
     public Person(){}
 
-    public Person(String firstName, String lastName, String dateOfBirth, String emailaddressPlayer,
-                  String mobileNumberPlayer, String street, int streetNb, int postalCode,
+    public Person(String firstName, String lastName, String dateOfBirth, String gender, String emailaddressPlayer,
+                  String mobileNumberPlayer, String street, String streetNb, int postalCode,
                   String location, boolean isPlayer, boolean isTrainer, boolean isAdmin, String imageUrl){
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
         this.emailaddressPlayer = emailaddressPlayer;
         this.mobileNumberPlayer = mobileNumberPlayer;
         this.street = street;
@@ -73,6 +75,14 @@ public class Person implements Serializable {
         this.dateOfBirth = dateOfBirth;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     public String getEmailaddressPlayer() {
         return emailaddressPlayer;
     }
@@ -87,11 +97,9 @@ public class Person implements Serializable {
         this.street = street;
     }
 
-    public int getStreetNb() {
-        return streetNb;
-    }
+    public String getStreetNb() { return streetNb; }
 
-    public void setStreetNb(int streetNb) {
+    public void setStreetNb(String streetNb) {
         this.streetNb = streetNb;
     }
 
@@ -139,7 +147,7 @@ public class Person implements Serializable {
         return isAdmin;
     }
 
-    public void setIsAdmin(boolean admin) {
+    public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
 
@@ -158,6 +166,7 @@ public class Person implements Serializable {
                     ", vorname='" + firstName + '\'' +
                     ", nachname='" + lastName + '\'' +
                     ", geburtsdatum='" + dateOfBirth + '\'' +
+                    ", geschlecht='" + gender + '\'' +
                     ", email='" + emailaddressPlayer + '\'' +
                     ", mobil='" + mobileNumberPlayer + '\'' +
                     ", Address='" + street + streetNb + postalCode + location + '\'' +
