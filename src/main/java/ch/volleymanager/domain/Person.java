@@ -2,20 +2,16 @@ package ch.volleymanager.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 
 @Entity
 public class Person implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
-    private long id;
+    private Long id;
     private String firstName;
     private String lastName;
     private String dateOfBirth;
-    @ElementCollection
-    @OneToMany
-    private ArrayList<String> sex =  new ArrayList<String>();
     private String emailaddressPlayer;
     private String mobileNumberPlayer;
     private String street;
@@ -35,7 +31,6 @@ public class Person implements Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
-       // String [] sexArray = {"m", "w"};
         this.emailaddressPlayer = emailaddressPlayer;
         this.mobileNumberPlayer = mobileNumberPlayer;
         this.street = street;
@@ -48,7 +43,7 @@ public class Person implements Serializable {
         this.imageUrl = imageUrl;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -168,9 +163,9 @@ public class Person implements Serializable {
                     ", email='" + emailaddressPlayer + '\'' +
                     ", mobil='" + mobileNumberPlayer + '\'' +
                     ", Address='" + street + streetNb + postalCode + location + '\'' +
-                    ", spieler=" + isPlayer + '\'' +
-                    ", trainer=" + isTrainer + '\'' +
-                    ", admin=" + isAdmin + '\'' +
+                    ", spieler=" + isPlayer +
+                    ", trainer=" + isTrainer +
+                    ", admin=" + isAdmin +
                     ", imageUrl='" + imageUrl + '\'' +
                     '}';
         }
