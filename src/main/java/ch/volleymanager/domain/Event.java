@@ -1,15 +1,25 @@
 package ch.volleymanager.domain;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "Event Table")
 public class Event {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, updatable = false)
     private long eventId;
+    @Column(name= "Event name", nullable = false, updatable = true)
     private String eventName;
+    @Column(name= "Event date",nullable = false, updatable = true)
     private String eventDate;
+    @Column(name= "Ämtli",nullable = false, updatable = true)
     private String eventJob;
+    @Column(name= "Ort",nullable = false, updatable = true)
     private String eventLocation;
+    @Column(name= "Number of helper",nullable = false, updatable = true)
     private int numberOfHelpersNeeded;
+    @Column(name= "Enough helpers?",nullable = false, updatable = true)
     private boolean numberOfHelpersOK;
     private Person person;
 

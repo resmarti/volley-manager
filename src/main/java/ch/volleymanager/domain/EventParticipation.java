@@ -1,10 +1,14 @@
 package ch.volleymanager.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class EventParticipation {
+    @Column(nullable = false, updatable = true)
     private boolean hasParticipated;
+    @ManyToMany
     private Person person;
 
     public EventParticipation(boolean hasParticipated, Person person) {

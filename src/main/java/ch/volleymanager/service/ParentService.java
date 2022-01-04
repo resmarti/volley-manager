@@ -12,30 +12,10 @@ import java.util.List;
 
 @Service
 @Transactional
-public class PersonService {
-    private final PersonRepo personRepo;
 
-    @Autowired
-    public PersonService(PersonRepo personRepo) {
-        this.personRepo = personRepo;
-    }
+public class ParentService {
+    private final ParentRepo parentRepo;
 
-    public Person addPerson(Person person) {
-        return personRepo.save(person);
-    }
-
-    public List<Person> findAllPersons() {
-        return personRepo.findAll();
-    }
-
-    public Person updatePerson(Person person) {
-        return personRepo.save(person);
-    }
-
-    public Person findPersonById(Long id) {
-        return personRepo.findPersonById(id)
-                .orElseThrow(() -> new UserNotFoundException("Die Person mit der ID " + id + " wurde nicht gefunden."));
-    }
 
     public void deletePerson(Long id) throws ParentNotDeletable {
 
@@ -46,7 +26,9 @@ public class PersonService {
         /*
         Parent parent = parentRepo.findParent(id)
          */
-        personRepo.deletePersonById(id)
+        parentRepo.deletePersonById(id)
                 .orElseThrow(() -> new ParentNotDeletable("Die Person mit der ID " + id + "kann nicht gelöscht werden."));
     }
+}
+
 }

@@ -7,21 +7,36 @@ import java.io.Serializable;
 public class Person implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, updatable = false)
+    @Column(name= "person_id", nullable = false, updatable = false)
     private Long id;
+    @Column(nullable = false, updatable = true)
     private String firstName;
+    @Column(nullable = false, updatable = true)
     private String lastName;
+    @Column(nullable = false, updatable = true)
     private String dateOfBirth;
+    @Column(nullable = false, updatable = true)
     private String emailaddressPlayer;
+    @Column(nullable = false, updatable = true)
     private String mobileNumberPlayer;
+    @Column(nullable = false, updatable = true)
     private String street;
+    @Column(nullable = false, updatable = true)
     private int streetNb;
+    @Column(nullable = false, updatable = true)
     private int postalCode;
+    @Column(nullable = false, updatable = true)
     private String location;
+    @Column(nullable = false, updatable = true)
     private boolean isPlayer;
+    @Column(nullable = false, updatable = true)
     private boolean isTrainer;
+    @Column(nullable = false, updatable = true)
     private boolean isAdmin;
+    @Column(nullable = false, updatable = true)
     private String imageUrl;
+    @ManyToOne
+    private Parent parent;
 
     public Person(){}
 

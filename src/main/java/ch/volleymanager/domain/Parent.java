@@ -1,23 +1,33 @@
 package ch.volleymanager.domain;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Parent {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "parent_id", nullable = false, updatable = false)
     private long id;
-    private String firstNameParent;
-    private String lastNameParent;
-    private String emailaddressParent;
-    private String mobileNumberParent;
-    private Person person;
-
-    public Parent(long id, String firstNameParent, String lastNameParent, String emailaddressParent, String mobileNumberParent, Person person) {
-        this.id = id;
-        this.firstNameParent = firstNameParent;
-        this.lastNameParent = lastNameParent;
-        this.emailaddressParent = emailaddressParent;
-        this.mobileNumberParent = mobileNumberParent;
-        this.person = person;
+    @Column(nullable = false, updatable = true)
+    private String firstName;
+    @Column(nullable = false, updatable = true)
+    private String lastName;
+    @Column(nullable = false, updatable = true)
+    private String dateOfBirth;
+    @Column(nullable = false, updatable = true)
+    private String emailaddress;
+    @Column(nullable = false, updatable = true)
+    private String mobileNumber;
+    @OneToMany
+    private Set<Person> person;
+ /* @ManyToMany
+    @JoinTable(name = "parent_id_person_id",
+            joinColumns = @JoinColumn(name = "parent_id"),
+            inverseJoinColumns = @JoinColumn(name = "person_id"))
+    private Set<Person> person;
+*/
+    public Parent() {
     }
 
     public long getId() {
@@ -28,55 +38,63 @@ public class Parent {
         this.id = id;
     }
 
-    public String getFirstNameParent() {
-        return firstNameParent;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstNameParent(String firstNameParent) {
-        this.firstNameParent = firstNameParent;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLastNameParent() {
-        return lastNameParent;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastNameParent(String lastNameParent) {
-        this.lastNameParent = lastNameParent;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getEmailaddressParent() {
-        return emailaddressParent;
+    public String getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setEmailaddressParent(String emailaddressParent) {
-        this.emailaddressParent = emailaddressParent;
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
-    public String getMobileNumberParent() {
-        return mobileNumberParent;
+    public String getEmailaddress() {
+        return emailaddress;
     }
 
-    public void setMobileNumberParent(String mobileNumberParent) {
-        this.mobileNumberParent = mobileNumberParent;
+    public void setEmailaddress(String emailaddress) {
+        this.emailaddress = emailaddress;
     }
 
-    public Person getPerson() {
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
+
+    public Set<Person> getPerson() {
         return person;
     }
 
-    public void setPerson(Person person) {
+    public void setPerson(Set<Person> person) {
         this.person = person;
     }
-
 
     @Override
     public String toString() {
         return "Parent{" +
                 "id=" + id +
-                ", vorname Elternteil='" + firstNameParent + '\'' +
-                ", nachname Elternteil='" + lastNameParent + '\'' +
-                ", email Elternteil='" + emailaddressParent + '\'' +
-                ", mobile Elternteil='" + mobileNumberParent + '\'' +
+                ", vorname='" + firstName + '\'' +
+                ", nachname='" + lastName + '\'' +
+                ", geburtsdatum='" + dateOfBirth + '\'' +
+                ", email='" + emailaddress + '\'' +
+                ", mobil='" + mobileNumber + '\'' +
                 '}';
     }
 }

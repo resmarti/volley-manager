@@ -1,15 +1,21 @@
 package ch.volleymanager.domain;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Team {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, updatable = false)
+    private long teamId;
     @ElementCollection
-    @OneToMany
-    private ArrayList<String> league =  new ArrayList<String>();
+    @ManyToMany
+    private List<String> league =  new ArrayList<String>();
     private int maxAge;
-    private ArrayList<String> sex =  new ArrayList<String>();
+    @ElementCollection
+    @ManyToMany
+    private List <String> sex =  new ArrayList<String>();
 }

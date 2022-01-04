@@ -6,7 +6,7 @@ import ch.volleymanager.domain.Person;
 import java.util.Optional;
 
 public interface PersonRepo extends JpaRepository<Person, Long> {
-    void deletePersonById(Long id);
+    Optional<Person> deletePersonById(Long id);
 
     Optional<Person> findPersonById(Long id);
 }
