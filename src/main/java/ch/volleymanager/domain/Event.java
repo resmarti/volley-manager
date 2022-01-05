@@ -1,6 +1,8 @@
 package ch.volleymanager.domain;
 
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "Event Table")
@@ -8,7 +10,7 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
-    private long eventId;
+    private Long eventId;
     @Column(name= "Event name", nullable = false, updatable = true)
     private String eventName;
     @Column(name= "Event date",nullable = false, updatable = true)
@@ -21,10 +23,12 @@ public class Event {
     private int numberOfHelpersNeeded;
     @Column(name= "Enough helpers?",nullable = false, updatable = true)
     private boolean numberOfHelpersOK;
-    private Person person;
+    @ManyToMany
+    @JoinTable(joinColumns = @JoinColumn(), inverseJoinColumns = @JoinColumn)
+    private Set<Player> players;
 
     public Event(long eventId, String eventName, String eventDate, String eventJob, String eventLocation, int numberOfHelpersNeeded,
-                 boolean numberOfHelpersOK, Person person) {
+                 boolean numberOfHelpersOK) {
         this.eventId=eventId;
         this.eventName = eventName;
         this.eventDate = eventDate;
@@ -32,9 +36,12 @@ public class Event {
         this.eventLocation = eventLocation;
         this.numberOfHelpersNeeded = numberOfHelpersNeeded;
         this.numberOfHelpersOK = numberOfHelpersOK;
-        this.person = person;
+
     }
 
+    public Event(){
+
+    }
     public long getEventId(){
         return eventId;
     }
@@ -91,13 +98,6 @@ public class Event {
         this.numberOfHelpersOK = numberOfHelpersOK;
     }
 
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
 
     @Override
     public String toString() {

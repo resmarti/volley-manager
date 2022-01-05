@@ -1,31 +1,27 @@
-package ch.volleymanager;
+package ch.volleymanager.resource;
 
-import ch.volleymanager.domain.Person;
-import ch.volleymanager.service.PersonService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import ch.volleymanager.service.AbstractPersonService;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/person")
-public class PersonResource {
-    private final PersonService personService;
+public class AbstractPersonResource {
+    private final AbstractPersonService personService;
 
-    public PersonResource(PersonService personService) {
+    public AbstractPersonResource(AbstractPersonService personService) {
         this.personService = personService;
     }
 
+    /*
     @GetMapping("/all")
-    public ResponseEntity<List<Person>> getAllPerson () {
-        List<Person> personen = personService.findAllPersons();
+    public ResponseEntity<List<AbstractPerson>> getAllPerson () {
+        List<AbstractPerson> personen = personService.findAllPersons();
         return new ResponseEntity<>(personen, HttpStatus.OK);
     }
 
     @GetMapping("/find/{id}")
-    public ResponseEntity<Person> getPersonById (@PathVariable("id") Long id) {
-        Person person = personService.findPersonById(id);
+    public ResponseEntity<Person> getById (@PathVariable("id") Long id) {
+        Person person = personService.findById(id);
         return new ResponseEntity<>(person, HttpStatus.OK);
     }
 
@@ -46,5 +42,6 @@ public class PersonResource {
         personService.deletePerson(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+    */
 
 }
