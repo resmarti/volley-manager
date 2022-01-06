@@ -1,6 +1,4 @@
 package ch.volleymanager.domain;
-
-
 import javax.persistence.*;
 import java.util.Set;
 

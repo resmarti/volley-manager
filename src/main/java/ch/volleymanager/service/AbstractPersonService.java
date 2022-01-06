@@ -1,14 +1,11 @@
 package ch.volleymanager.service;
 
-import ch.volleymanager.exception.ParentNotDeletable;
-import ch.volleymanager.exception.UserNotFoundException;
+import ch.volleymanager.domain.ContactPerson;
 import ch.volleymanager.repo.AbstractPersonRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -19,7 +16,17 @@ public class AbstractPersonService {
     public AbstractPersonService(AbstractPersonRepo abstractPersonRepo) {
         this.abstractPersonRepo = abstractPersonRepo;
     }
-/*
+    //Todo: ContactPerson can only be deleted when no player is attached
+
+    //Todo: Find Player by Name
+
+    //Todo: Find Team
+
+    //Todo: List Events by Team
+
+    // Todo: List Events by AbstractPerson (Coach, Player)
+
+ /*
     public AbstractPerson addPerson(AbstractPerson person) {
         return abstractPersonRepo.save(person);
     }
