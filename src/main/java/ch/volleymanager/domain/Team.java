@@ -16,9 +16,8 @@ public class Team {
     @ManyToMany
     private Set <Event> events;
     @ManyToMany
-    private Set <Player> players;
-    @ManyToMany
-    private Set <Coach> coaches;
+    private Set <TeamMember> teamMembers;
+
 
     //Contructor
     public Team(long teamId, int maxAge) {
@@ -46,4 +45,19 @@ public class Team {
         this.maxAge = maxAge;
     }
 
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
+    }
+
+    public Set<TeamMember> getTeammembers() {
+        return teamMembers;
+    }
+
+    public void setTeammembers(Set<TeamMember> teamMembers) {
+        this.teamMembers = teamMembers;
+    }
 }

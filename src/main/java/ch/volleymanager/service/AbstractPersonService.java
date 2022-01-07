@@ -16,7 +16,6 @@ public class AbstractPersonService {
     public AbstractPersonService(AbstractPersonRepo abstractPersonRepo) {
         this.abstractPersonRepo = abstractPersonRepo;
     }
-    //Todo: ContactPerson can only be deleted when no player is attached
 
     //Todo: Find Player by Name
 

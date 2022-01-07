@@ -7,13 +7,13 @@ import java.util.Set;
 public class ContactPerson extends AbstractPerson {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "contactPerson")
-    private Set<Player> players;
+    private Set<TeamMember> teamMembers;
 
-    public Set<Player> getPlayers() {
-        return players;
+    public Set<TeamMember> getTeamMembers() {
+        return teamMembers;
     }
 
-    public void setPlayers(Set<Player> players) {
-        this.players = players;
+    public void setTeamMembers(Set<TeamMember> teamMembers) {
+        this.teamMembers = teamMembers;
     }
 }

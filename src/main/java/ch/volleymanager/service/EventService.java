@@ -22,7 +22,7 @@ public class EventService {
         return eventRepo.save(event);
     }
 
-    public List<Event> findAllEvents(){
+    public List<Event> findAllEvents() {
         return eventRepo.findAll();
     }
 
@@ -30,8 +30,12 @@ public class EventService {
         return eventRepo.save(event);
     }
 
-    public void deleteEventById (Long eventid) throws EventNotDeletable {
-        eventRepo.deleteEventById(eventid)
-            .orElseThrow(() -> new EventNotDeletable ("Die Person mit der ID " + eventid + "kann nicht gelöscht werden."));
+    public void deleteEventById(Long eventid) throws EventNotDeletable {
+        Event event = eventRepo.getById(eventid);
+        if(event.getEventValid()) {
+            eventRepo.deleteEventById(eventid)
+                    .orElseThrow(() -> new EventNotDeletable("Der Event mit der ID " + eventid + "kann nicht gelöscht werden."));
+        }
     }
+
 }

@@ -1,11 +1,10 @@
 package ch.volleymanager.domain;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
 
-public class AbstractPerson {
+@Entity
+public class AbstractPerson implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -89,5 +88,19 @@ public class AbstractPerson {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+
+@Override
+public String toString() {
+    return "AbstractPlayer{" +
+            "id=" + id +
+            ",firstName='" + firstName + '\'' +
+            ",lastName='" + lastName +'\'' +
+            ",street='" + street +'\'' +
+            ",streetNb ='" + streetNb +'\'' +
+            ",postalCode='" + postalCode +'\'' +
+            ",location='" + location +'\'' +
+            '}';
     }
 }
