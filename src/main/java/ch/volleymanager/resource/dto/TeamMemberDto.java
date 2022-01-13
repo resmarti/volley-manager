@@ -9,7 +9,7 @@ public class TeamMemberDto extends AbstractPersonDto {
 
     private LocalDate dateOfBirth;
     private boolean isCoach;
-    private ContactPersonDto contactPerson;
+    private ContactPersonSimpleDto contactPerson;
     private Set<TeamSimpleDto> teams = new HashSet<>();
     private Set<EventSimpleDto> events = new HashSet<>();
 
@@ -17,7 +17,7 @@ public class TeamMemberDto extends AbstractPersonDto {
     }
 
     public TeamMemberDto(Long id, String firstName, String lastName, String street, int streetNb, int postalCode, String location,
-                      LocalDate dateOfBirth, ContactPersonDto contactPerson, Set<TeamSimpleDto> teams, boolean isCoach) {
+                      LocalDate dateOfBirth, ContactPersonSimpleDto contactPerson, Set<TeamSimpleDto> teams, boolean isCoach) {
         super(id, firstName, lastName, street, streetNb, postalCode, location);
         this.dateOfBirth = dateOfBirth;
         this.contactPerson = contactPerson;
@@ -33,11 +33,11 @@ public class TeamMemberDto extends AbstractPersonDto {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public ContactPersonDto getContactPerson() {
+    public ContactPersonSimpleDto getContactPerson() {
         return contactPerson;
     }
 
-    public void setContactPerson(ContactPersonDto contactPerson) {
+    public void setContactPerson(ContactPersonSimpleDto contactPerson) {
         this.contactPerson = contactPerson;
     }
 
