@@ -2,6 +2,7 @@ package ch.volleymanager.resource;
 
 import ch.volleymanager.domain.Team;
 import ch.volleymanager.domain.TeamMember;
+import ch.volleymanager.resource.dto.TeamMemberDto;
 import ch.volleymanager.service.TeamMemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,13 @@ public class TeamMemberResource {
 
     @GetMapping("/all")
     public ResponseEntity<List<TeamMember>> getAllTeamMembers(){
-        List<TeamMember> teamMembers = teamMemberService.findAllTeammembers();
+        List<TeamMember> teamMembers = teamMemberService.findAllTeamMembers();
+        return new ResponseEntity<>(teamMembers, HttpStatus.OK);
+    }
+
+    @GetMapping("/all-eager")
+    public ResponseEntity<List<TeamMemberDto>> getAllTeamMembersEager(){
+        List<TeamMemberDto> teamMembers = teamMemberService.findAllTeamMembersEager();
         return new ResponseEntity<>(teamMembers, HttpStatus.OK);
     }
 
@@ -33,7 +40,7 @@ public class TeamMemberResource {
 
     @PostMapping("/add")
     public ResponseEntity<TeamMember> addTeamMember(@RequestBody TeamMember teammember) {
-        TeamMember newTeamMember = teamMemberService.addTeammember(teammember);
+        TeamMember newTeamMember = teamMemberService.addTeamMember(teammember);
         return new ResponseEntity<>(newTeamMember, HttpStatus.CREATED);
     }
 

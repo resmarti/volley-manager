@@ -1,47 +1,21 @@
-package ch.volleymanager.domain;
+package ch.volleymanager.resource.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.apache.tomcat.jni.Local;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@Table(name = "Event_Table")
-public class Event {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, updatable = false)
-    private Long eventId;
-    @Column(name = "Event_name", nullable = false, updatable = true)
-    private String eventName;
-    @Column(name = "Event_date", nullable = false, updatable = true)
-    private LocalDate eventDate;
-    @Column(name = "Aemtli", nullable = false, updatable = true)
-    private String eventJob;
-    @Column(name = "Ort", nullable = false, updatable = true)
-    private String eventLocation;
-    @Column(name = "Number_of_helper", nullable = false, updatable = true)
-    private int numberOfHelpersNeeded;
-    @Column(name = "Enough_helpers", nullable = false, updatable = true)
-    private boolean numberOfHelpersOK;
-    @ManyToMany
-    @JoinTable(joinColumns = @JoinColumn(), inverseJoinColumns = @JoinColumn)
-    @JsonIgnore
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private Set<TeamMember> teamMembers;
-    @ManyToMany
-    @JoinTable(joinColumns = @JoinColumn(), inverseJoinColumns =@JoinColumn)
-    @JsonIgnore
-    @LazyCollection (LazyCollectionOption.FALSE)
-    private Set<Team> teams;
+public class EventSimpleDto {
 
-    public Event(Long eventId, String eventName, LocalDate eventDate, String eventJob, String eventLocation, int numberOfHelpersNeeded,
-                 boolean numberOfHelpersOK, Set<TeamMember> teamMembers, Set<Team> teams) {
+    private Long eventId;
+    private String eventName;
+    private LocalDate eventDate;
+    private String eventJob;
+    private String eventLocation;
+    private int numberOfHelpersNeeded;
+    private boolean numberOfHelpersOK;
+
+    public EventSimpleDto(Long eventId, String eventName, LocalDate eventDate, String eventJob, String eventLocation, int numberOfHelpersNeeded,
+                          boolean numberOfHelpersOK, Set<TeamMemberDto> teamMembers, Set<TeamDto> teams) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.eventDate = eventDate;
@@ -49,11 +23,9 @@ public class Event {
         this.eventLocation = eventLocation;
         this.numberOfHelpersNeeded = numberOfHelpersNeeded;
         this.numberOfHelpersOK = numberOfHelpersOK;
-        this.teamMembers = teamMembers;
-        this.teams = teams;
     }
 
-    public Event() {
+    public EventSimpleDto() {
     }
 
     public Long getEventId() {
@@ -117,22 +89,6 @@ public class Event {
         return this.eventDate.isBefore(LocalDate.now());
     }
 
-    public Set<TeamMember> getTeamMembers() {
-        return teamMembers;
-    }
-
-    public void setTeamMembers(Set<TeamMember> teamMembers) {
-        this.teamMembers = teamMembers;
-    }
-
-    public Set<Team> getTeams() {
-        return teams;
-    }
-
-    public void setTeams(Set<Team> teams) {
-        this.teams = teams;
-    }
-
     @Override
     public String toString() {
         return "Event{" +
@@ -144,13 +100,5 @@ public class Event {
                 '}';
     }
 
-    public void addTeam(Team team) {
-        if (teams == null) teams = new HashSet<>();
-        teams.add(team);
-    }
-
-    public void addTeamMember(TeamMember teamMember) {
-        if (teamMembers == null) teamMembers = new HashSet<>();
-        teamMembers.add(teamMember);
-    }
 }
+

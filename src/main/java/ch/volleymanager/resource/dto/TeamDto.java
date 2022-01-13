@@ -1,45 +1,29 @@
-package ch.volleymanager.domain;
+package ch.volleymanager.resource.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
-import javax.persistence.*;
+import ch.volleymanager.domain.Event;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-public class Team {
+public class TeamDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, updatable = false)
     private Long teamId;
     private String teamName;
-    @Column(nullable = false, updatable = true)
     private int maxAge;
-    @Column (nullable = false, updatable = true)
-    @ManyToMany
-    @JsonIgnore
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private Set <Event> events = new HashSet<>();
-    @ManyToMany
-    @JsonIgnore
-    @LazyCollection (LazyCollectionOption.FALSE)
-    private Set <TeamMember> teamMembers = new HashSet<>();
+    private Set<Event> events = new HashSet<>();
+    private Set <TeamMemberDto> teamMembers = new HashSet<>();
 
 
     //Contructor
-    public Team(Long teamId, int maxAge, String teamName, Set<Event> events, Set<TeamMember> teamMembers) {
+    public TeamDto(Long teamId, int maxAge, String teamName, Set<Event> events, Set<TeamMemberDto> teamMembers) {
         this.teamId = teamId;
         this.maxAge = maxAge;
         this.teamName = teamName;
         this.events = events;
         this.teamMembers = teamMembers;
-   }
+    }
     //empty constructor for the DB
-    public Team(){
-         }
+    public TeamDto(){
+    }
 
     //Getter and Setter methods
     public Long getTeamId() {
@@ -66,11 +50,11 @@ public class Team {
         this.events = events;
     }
 
-    public Set<TeamMember> getTeammembers() {
+    public Set<TeamMemberDto> getTeammembers() {
         return teamMembers;
     }
 
-    public void setTeammembers(Set<TeamMember> teamMembers) {
+    public void setTeammembers(Set<TeamMemberDto> teamMembers) {
         this.teamMembers = teamMembers;
     }
 
@@ -82,7 +66,7 @@ public class Team {
         this.teamName = teamName;
     }
 
-    public void addTeamMember(TeamMember teamMember) {
+    public void addTeamMember(TeamMemberDto teamMember) {
         if (teamMembers == null) teamMembers = new HashSet<>();
         teamMembers.add(teamMember);
     }

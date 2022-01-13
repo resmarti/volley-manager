@@ -1,27 +1,24 @@
-package ch.volleymanager.domain;
+package ch.volleymanager.resource.dto;
 
-import javax.persistence.*;
-import java.io.Serializable;
 
-@Entity
-public class AbstractPerson implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class AbstractPersonDto {
+
+
     private Long id;
-    @Column(nullable = false)
+
     private String firstName;
-    @Column(nullable = false)
+
     private String lastName;
-    @Column(nullable = false)
+
     private String street;
-    @Column(nullable = false, updatable = true)
+
     private int streetNb;
-    @Column(nullable = false, updatable = true)
+
     private int postalCode;
-    @Column(nullable = false, updatable = true)
+
     private String location;
 
-    public AbstractPerson(Long id, String firstName, String lastName, String street, int streetNb, int postalCode, String location) {
+    public AbstractPersonDto(Long id, String firstName, String lastName, String street, int streetNb, int postalCode, String location) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -31,8 +28,8 @@ public class AbstractPerson implements Serializable {
         this.location = location;
     }
 
-    public AbstractPerson(){
-        }
+    public AbstractPersonDto(){
+    }
 
     public Long getId() {
         return id;
@@ -91,16 +88,17 @@ public class AbstractPerson implements Serializable {
     }
 
 
-@Override
-public String toString() {
-    return "AbstractPerson{" +
-            "id=" + id +
-            ",firstName='" + firstName + '\'' +
-            ",lastName='" + lastName +'\'' +
-            ",street='" + street +'\'' +
-            ",streetNb ='" + streetNb +'\'' +
-            ",postalCode='" + postalCode +'\'' +
-            ",location='" + location +'\'' +
-            '}';
+    @Override
+    public String toString() {
+        return "AbstractPlayer{" +
+                "id=" + id +
+                ",firstName='" + firstName + '\'' +
+                ",lastName='" + lastName +'\'' +
+                ",street='" + street +'\'' +
+                ",streetNb ='" + streetNb +'\'' +
+                ",postalCode='" + postalCode +'\'' +
+                ",location='" + location +'\'' +
+                '}';
     }
+
 }

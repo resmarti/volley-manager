@@ -7,9 +7,15 @@ import ch.volleymanager.exception.UserCanNotBeAdded;
 import ch.volleymanager.exception.UserCanNotBeDeleted;
 import ch.volleymanager.exception.UserNotFoundException;
 import ch.volleymanager.repo.TeamMemberRepo;
+import ch.volleymanager.resource.dto.TeamMemberDto;
+import ch.volleymanager.utils.FieldMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.*;
 
 @Service
@@ -17,15 +23,18 @@ public class TeamMemberService {
     @Autowired
     private final TeamMemberRepo teamMemberRepo;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     public TeamMemberService(TeamMemberRepo teammemberRepo) {
         this.teamMemberRepo = teammemberRepo;
     }
 
-    public TeamMember addTeammember(TeamMember teammember) {
+    public TeamMember addTeamMember(TeamMember teammember) {
         return teamMemberRepo.save(teammember);
     }
 
-    public List<TeamMember> findAllTeammembers() {
+    public List<TeamMember> findAllTeamMembers() {
         return teamMemberRepo.findAll();
     }
 
@@ -69,6 +78,21 @@ public class TeamMemberService {
         teamMember.getEvents().add(event);
         event.getTeamMembers().add(teamMember);
             return teamMember.getEvents();
+    }
+
+    public List<TeamMemberDto> findAllTeamMembersEager() {
+        List<TeamMember>teamMembers = teamMemberRepo.findAllWithEagerRelationships();
+        List<TeamMemberDto>teamMemberDtos = new ArrayList<>();
+        teamMembers.forEach(teamMember -> teamMemberDtos.add(convertToDto(teamMember)));
+        return teamMemberDtos;
+    }
+
+    private TeamMemberDto convertToDto(TeamMember teamMember) {
+        return modelMapper.map(teamMember, TeamMemberDto.class);
+    }
+
+    private TeamMember convertToEntity(TeamMemberDto teamMemberDto)  {
+        return modelMapper.map(teamMemberDto, TeamMember.class);
     }
 }
 

@@ -1,37 +1,23 @@
-package ch.volleymanager.domain;
+package ch.volleymanager.resource.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-public class TeamMember extends AbstractPerson {
+public class TeamMemberDto extends AbstractPersonDto {
 
-    @Column
     private LocalDate dateOfBirth;
     private boolean isCoach;
-    @ManyToOne
-    private ContactPerson contactPerson;
-    @JsonIgnore
-    @ManyToMany
-    @LazyCollection (LazyCollectionOption.FALSE)
-    private Set<Team> teams = new HashSet<>();
-    @JsonIgnore
-    @ManyToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private Set<Event> events = new HashSet<>();
+    private ContactPersonDto contactPerson;
+    private Set<TeamSimpleDto> teams = new HashSet<>();
+    private Set<EventSimpleDto> events = new HashSet<>();
 
-    public TeamMember(){
+    public TeamMemberDto(){
     }
 
-    public TeamMember(Long id, String firstName, String lastName, String street, int streetNb, int postalCode, String location,
-                      LocalDate dateOfBirth, ContactPerson contactPerson, Set<Team> teams, boolean isCoach) {
+    public TeamMemberDto(Long id, String firstName, String lastName, String street, int streetNb, int postalCode, String location,
+                      LocalDate dateOfBirth, ContactPersonDto contactPerson, Set<TeamSimpleDto> teams, boolean isCoach) {
         super(id, firstName, lastName, street, streetNb, postalCode, location);
         this.dateOfBirth = dateOfBirth;
         this.contactPerson = contactPerson;
@@ -47,19 +33,19 @@ public class TeamMember extends AbstractPerson {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public ContactPerson getContactPerson() {
+    public ContactPersonDto getContactPerson() {
         return contactPerson;
     }
 
-    public void setContactPerson(ContactPerson contactPerson) {
+    public void setContactPerson(ContactPersonDto contactPerson) {
         this.contactPerson = contactPerson;
     }
 
-    public Set<Team> getTeams() {
+    public Set<TeamSimpleDto> getTeams() {
         return teams;
     }
 
-    public void setTeams(Set<Team> teams) {
+    public void setTeams(Set<TeamSimpleDto> teams) {
         this.teams = teams;
     }
 
@@ -71,11 +57,11 @@ public class TeamMember extends AbstractPerson {
         isCoach = coach;
     }
 
-    public Set<Event> getEvents() {
+    public Set<EventSimpleDto> getEvents() {
         return events;
     }
 
-    public void setEvents(Set<Event> events) {
+    public void setEvents(Set<EventSimpleDto> events) {
         this.events = events;
     }
 
@@ -83,12 +69,12 @@ public class TeamMember extends AbstractPerson {
         return Period.between(this.dateOfBirth, LocalDate.now()).getYears();
     }
 
-    public void addTeam(Team team) {
+    public void addTeam(TeamSimpleDto team) {
         if (teams == null) teams = new HashSet<>();
         teams.add(team);
     }
 
-    public void addEvent(Event event) {
+    public void addEventDto(EventSimpleDto event) {
         if (events == null) events = new HashSet<>();
         events.add(event);
     }
