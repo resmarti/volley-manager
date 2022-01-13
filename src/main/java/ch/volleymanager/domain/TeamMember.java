@@ -1,23 +1,27 @@
 package ch.volleymanager.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 public class TeamMember extends AbstractPerson {
 
-    @Column(nullable = false)
+    @Column
     private LocalDate dateOfBirth;
     private boolean isCoach;
     @ManyToOne
-    @JoinColumn(name="contact_person_id")
     private ContactPerson contactPerson;
+    @JsonIgnore
     @ManyToMany
-    private Set<Team> teams;
+    private Set<Team> teams = new HashSet<>();
+    @JsonIgnore
     @ManyToMany
-    private Set<Event> events;
+    private Set<Event> events = new HashSet<>();
 
     public TeamMember(){
     }
@@ -29,7 +33,6 @@ public class TeamMember extends AbstractPerson {
         this.contactPerson = contactPerson;
         this.teams = teams;
         this.isCoach = isCoach;
-        this.events = events;
     }
 
     public LocalDate getDateOfBirth() {
@@ -76,4 +79,13 @@ public class TeamMember extends AbstractPerson {
         return Period.between(this.dateOfBirth, LocalDate.now()).getYears();
     }
 
+    public void addTeam(Team team) {
+        if (teams == null) teams = new HashSet<>();
+        teams.add(team);
+    }
+
+    public void addEvent(Event event) {
+        if (events == null) events = new HashSet<>();
+        events.add(event);
+    }
 }

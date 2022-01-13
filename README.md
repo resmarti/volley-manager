@@ -44,3 +44,14 @@ Der Inhalt der DB kann wie folgt betrachtet werden:
 ![h2-db.jpg](readme/h2-db.jpg)
 
 <br>
+
+
+## Zugriff auf Swagger UI
+
+[http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+
+## Download der Swagger YAML Datei
+
+[http://localhost:8080/v3/api-docs.yaml](http://localhost:8080/v3/api-docs.yaml)
+ -> yaml file is downloaded -> [https://editor.swagger.io/](https://editor.swagger.io/)
+

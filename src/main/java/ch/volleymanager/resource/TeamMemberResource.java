@@ -20,19 +20,19 @@ public class TeamMemberResource {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<TeamMember>> getAllTeammembers(){
+    public ResponseEntity<List<TeamMember>> getAllTeamMembers(){
         List<TeamMember> teamMembers = teamMemberService.findAllTeammembers();
         return new ResponseEntity<>(teamMembers, HttpStatus.OK);
     }
 
     @GetMapping("/find/{id}")
-    public ResponseEntity<TeamMember> getTeammemberById(@PathVariable("id")Long id){
+    public ResponseEntity<TeamMember> getTeamMemberById(@PathVariable("id")Long id){
         TeamMember teammember = teamMemberService.findTeamMemberById(id);
         return new ResponseEntity<>(teammember, HttpStatus.OK);
     }
 
     @PostMapping("/add")
-    public ResponseEntity<TeamMember> addTeammember(@RequestBody TeamMember teammember) {
+    public ResponseEntity<TeamMember> addTeamMember(@RequestBody TeamMember teammember) {
         TeamMember newTeamMember = teamMemberService.addTeammember(teammember);
         return new ResponseEntity<>(newTeamMember, HttpStatus.CREATED);
     }
@@ -44,7 +44,7 @@ public class TeamMemberResource {
     }
 
     @DeleteMapping("/delete{id}")
-    public ResponseEntity<?> deleteTeammember(@PathVariable("id")Long id) {
+    public ResponseEntity<?> deleteTeamMember(@PathVariable("id")Long id) {
         teamMemberService.deleteTeamMember(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

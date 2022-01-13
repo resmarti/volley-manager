@@ -1,9 +1,11 @@
 package ch.volleymanager.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -27,12 +29,14 @@ public class Event {
     private boolean numberOfHelpersOK;
     @ManyToMany
     @JoinTable(joinColumns = @JoinColumn(), inverseJoinColumns = @JoinColumn)
+    @JsonIgnore
     private Set<TeamMember> teamMembers;
     @ManyToMany
     @JoinTable(joinColumns = @JoinColumn(), inverseJoinColumns =@JoinColumn)
+    @JsonIgnore
     private Set<Team> teams;
 
-    public Event(long eventId, String eventName, LocalDate eventDate, String eventJob, String eventLocation, int numberOfHelpersNeeded,
+    public Event(Long eventId, String eventName, LocalDate eventDate, String eventJob, String eventLocation, int numberOfHelpersNeeded,
                  boolean numberOfHelpersOK, Set<TeamMember> teamMembers, Set<Team> teams) {
         this.eventId = eventId;
         this.eventName = eventName;
@@ -48,11 +52,11 @@ public class Event {
     public Event() {
     }
 
-    public long getEventId() {
+    public Long getEventId() {
         return eventId;
     }
 
-    public void setEventId(long eventId) {
+    public void setEventId(Long eventId) {
         this.eventId = eventId;
     }
 
@@ -136,4 +140,13 @@ public class Event {
                 '}';
     }
 
+    public void addTeam(Team team) {
+        if (teams == null) teams = new HashSet<>();
+        teams.add(team);
+    }
+
+    public void addTeamMember(TeamMember teamMember) {
+        if (teamMembers == null) teamMembers = new HashSet<>();
+        teamMembers.add(teamMember);
+    }
 }
