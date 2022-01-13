@@ -19,7 +19,6 @@ import java.util.List;
 @Configuration
 @Profile("dev")
 @Transactional
-// @ConditionalOnClass(name = {"org.h2.Driver"})
 public class DevConfiguration implements HasLogger {
 
     private Long felixMusterId;

@@ -8,10 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AbstractPersonRepo extends JpaRepository<AbstractPerson, Long> {
-    Optional<AbstractPerson> deletePersonById(Long id);
-    List<AbstractPerson> findAbstractPersonById(Long id);
 
-    @Query
-    List<Long> findDistinctById(Long id);
 
 }

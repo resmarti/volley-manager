@@ -6,14 +6,6 @@
   "postalCode": 5000,
   "location": "Aarau",
   "dateOfBirth": "2008-03-03",
-  "isCoach": false,
-  "contactPerson": {
-    "firstName": "Felix",
-    "lastName": "Muster",
-    "street": "Bahnhofstrasse",
-    "streetNb": 1,
-    "postalCode": 5000,
-    "location": "Aarau"
-  }
+  "isCoach": false
 
 }
