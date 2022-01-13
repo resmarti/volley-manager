@@ -14,22 +14,6 @@
     "streetNb": 1,
     "postalCode": 5000,
     "location": "Aarau"
-  },
-  "teams": [
-    {
-      "teamName": "Max15Aged",
-      "maxAge": 15
-    }
-  ],
-  "events": [
-    {
-      "eventName": "April Turnier",
-      "eventDate": "2022-04-18",
-      "eventJob": "April Job",
-      "eventLocation": "Volley Ball Halle",
-      "numberOfHelpersNeeded": 5,
-      "numberOfHelpersOK": false,
-      "eventValid": false
-    }
-  ]
+  }
+
 }

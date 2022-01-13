@@ -36,7 +36,6 @@ public class TeamMemberResourceTest extends AbstractTest {
 
         TeamMemberDto[] contactList = super.mapFromJson(response, TeamMemberDto[].class);
         assertTrue(contactList.length > 0);
-
     }
 
 }
