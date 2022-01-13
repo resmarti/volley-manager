@@ -10,6 +10,7 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
     private long teamId;
+    private String teamName;
     @Column(nullable = false, updatable = true)
     private int maxAge;
     @Column (nullable = false, updatable = true)
@@ -20,9 +21,12 @@ public class Team {
 
 
     //Contructor
-    public Team(long teamId, int maxAge) {
+    public Team(long teamId, int maxAge, String teamName, Set<Event> events, Set<TeamMember> teamMember) {
         this.teamId = teamId;
         this.maxAge = maxAge;
+        this.teamName = teamName;
+        this.events = events;
+        this.teamMembers = teamMember;
    }
     //empty constructor for the DB
     public Team(){
@@ -59,5 +63,13 @@ public class Team {
 
     public void setTeammembers(Set<TeamMember> teamMembers) {
         this.teamMembers = teamMembers;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 }

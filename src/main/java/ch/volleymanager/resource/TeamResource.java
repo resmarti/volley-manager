@@ -1,6 +1,8 @@
 package ch.volleymanager.resource;
 
+import ch.volleymanager.domain.Event;
 import ch.volleymanager.domain.Team;
+import ch.volleymanager.domain.TeamMember;
 import ch.volleymanager.service.TeamService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,6 +47,19 @@ public TeamResource (TeamService teamService){
     public ResponseEntity<?> deleteTeam(@PathVariable("id")Long id) {
         teamService.deleteTeam(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/removeTeamMemberFromTeam{id}")
+    public ResponseEntity<?> removeTeamMemberFromTeam (@PathVariable("id")Long id, TeamMember teamMember){
+        //teamService.removeTeamFromTeamMember(teamMember);
+        return  new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("/addTeamToEvent")
+    public ResponseEntity<Team>addTeamToEvent(Long teamId, @RequestBody Event event){
+
+    teamService.addTeamToEvent(teamId, event);
+    return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

@@ -16,6 +16,8 @@ public class TeamMember extends AbstractPerson {
     private ContactPerson contactPerson;
     @ManyToMany
     private Set<Team> teams;
+    @ManyToMany
+    private Set<Event> events;
 
     public TeamMember(){
     }
@@ -27,6 +29,7 @@ public class TeamMember extends AbstractPerson {
         this.contactPerson = contactPerson;
         this.teams = teams;
         this.isCoach = isCoach;
+        this.events = events;
     }
 
     public LocalDate getDateOfBirth() {
@@ -59,6 +62,14 @@ public class TeamMember extends AbstractPerson {
 
     public void setIsCoach(boolean coach) {
         isCoach = coach;
+    }
+
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
     }
 
     public int calculateAge () {

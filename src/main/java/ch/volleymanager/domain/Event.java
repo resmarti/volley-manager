@@ -28,9 +28,12 @@ public class Event {
     @ManyToMany
     @JoinTable(joinColumns = @JoinColumn(), inverseJoinColumns = @JoinColumn)
     private Set<TeamMember> teamMembers;
+    @ManyToMany
+    @JoinTable(joinColumns = @JoinColumn(), inverseJoinColumns =@JoinColumn)
+    private Set<Team> teams;
 
     public Event(long eventId, String eventName, LocalDate eventDate, String eventJob, String eventLocation, int numberOfHelpersNeeded,
-                 boolean numberOfHelpersOK) {
+                 boolean numberOfHelpersOK, Set<TeamMember> teamMembers, Set<Team> teams) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.eventDate = eventDate;
@@ -38,6 +41,8 @@ public class Event {
         this.eventLocation = eventLocation;
         this.numberOfHelpersNeeded = numberOfHelpersNeeded;
         this.numberOfHelpersOK = numberOfHelpersOK;
+        this.teamMembers = teamMembers;
+        this.teams = teams;
     }
 
     public Event() {
@@ -104,6 +109,21 @@ public class Event {
         return this.eventDate.isBefore(LocalDate.now());
     }
 
+    public Set<TeamMember> getTeamMembers() {
+        return teamMembers;
+    }
+
+    public void setTeamMembers(Set<TeamMember> teamMembers) {
+        this.teamMembers = teamMembers;
+    }
+
+    public Set<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(Set<Team> teams) {
+        this.teams = teams;
+    }
 
     @Override
     public String toString() {

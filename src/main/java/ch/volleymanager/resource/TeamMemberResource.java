@@ -1,5 +1,6 @@
 package ch.volleymanager.resource;
 
+import ch.volleymanager.domain.Team;
 import ch.volleymanager.domain.TeamMember;
 import ch.volleymanager.service.TeamMemberService;
 import org.springframework.http.HttpStatus;
@@ -7,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/teammember")
@@ -36,8 +38,8 @@ public class TeamMemberResource {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<TeamMember> updateTeammember(@RequestBody TeamMember teammember) {
-        TeamMember updateTeamMember = teamMemberService.updateTeammember(teammember);
+    public ResponseEntity<TeamMember> updateTeamMember(@RequestBody TeamMember teamMember) {
+        TeamMember updateTeamMember = teamMemberService.updateTeamMember(teamMember);
         return new ResponseEntity<>(updateTeamMember, HttpStatus.OK);
     }
 
@@ -46,4 +48,18 @@ public class TeamMemberResource {
         teamMemberService.deleteTeammember(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @DeleteMapping("/removeTeamMemberFromTeam{id}")
+    public ResponseEntity<?> removeTeamMemberFromTeam (@PathVariable("id")Long id, Team team){
+        teamMemberService.removeTeamMemberFromTeam(id, team);
+        return  new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("/addTeamMemberToTeam")
+    public ResponseEntity<Set<Team>> addTeamMemberToTeam(Long memberId, Team team){
+        Set<Team> newTeamMember = teamMemberService.addTeamMemberToTeam(memberId, team);
+        return new ResponseEntity<>(newTeamMember, HttpStatus.CREATED);
+    }
+
+
 }

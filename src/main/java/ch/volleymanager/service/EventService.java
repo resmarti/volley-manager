@@ -1,5 +1,6 @@
 package ch.volleymanager.service;
 import ch.volleymanager.domain.Event;
+import ch.volleymanager.domain.Team;
 import ch.volleymanager.exception.EventNotDeletable;
 import ch.volleymanager.repo.EventRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
