@@ -15,36 +15,36 @@ import java.util.*;
 @Service
 public class TeamMemberService {
     @Autowired
-    private final TeamMemberRepo teammemberRepo;
+    private final TeamMemberRepo teamMemberRepo;
 
     public TeamMemberService(TeamMemberRepo teammemberRepo) {
-        this.teammemberRepo = teammemberRepo;
+        this.teamMemberRepo = teammemberRepo;
     }
 
     public TeamMember addTeammember(TeamMember teammember) {
-        return teammemberRepo.save(teammember);
+        return teamMemberRepo.save(teammember);
     }
 
     public List<TeamMember> findAllTeammembers() {
-        return teammemberRepo.findAll();
+        return teamMemberRepo.findAll();
     }
 
     public TeamMember updateTeamMember(TeamMember teammember) {
-        return teammemberRepo.save(teammember);
+        return teamMemberRepo.save(teammember);
     }
 
-    public void deleteTeammember(Long id) {
-        teammemberRepo.deleteTeammemberById(id);
+    public void deleteTeamMember(Long id) {
+        teamMemberRepo.deleteById(id);
     }
 
-    public TeamMember findTeammemberById(Long id) {
-        return teammemberRepo.findById(id)
+    public TeamMember findTeamMemberById(Long id) {
+        return teamMemberRepo.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("Teammitglied " + id + "konnte nicht gefunden werden"));
     }
 
     //Add team member to team with check of the maxAge in class Team
     public Set<Team> addTeamMemberToTeam(Long id, Team team) {
-        TeamMember teamMember = findTeammemberById(id);
+        TeamMember teamMember = findTeamMemberById(id);
 
         if (team.getMaxAge() >= teamMember.calculateAge()) {
             teamMember.getTeams().add(team);
@@ -57,7 +57,7 @@ public class TeamMemberService {
     }
 
     public Set<Team> removeTeamMemberFromTeam(Long id, Team team){
-        TeamMember teamMember = findTeammemberById(id);
+        TeamMember teamMember = findTeamMemberById(id);
         if(team.getTeammembers().contains(teamMember)){
             teamMember.getTeams().remove(teamMember);
             team.getTeammembers().remove(team);
@@ -65,7 +65,7 @@ public class TeamMemberService {
     }
 
     public Set<Event> addTeamMemberToEvent(Long id, Event event){
-        TeamMember teamMember = findTeammemberById(id);
+        TeamMember teamMember = findTeamMemberById(id);
         teamMember.getEvents().add(event);
         event.getTeamMembers().add(teamMember);
             return teamMember.getEvents();

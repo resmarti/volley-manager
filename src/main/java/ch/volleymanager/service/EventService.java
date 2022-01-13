@@ -33,10 +33,10 @@ public class EventService {
     }
 
     public void deleteEventById(Long eventid) throws EventNotDeletable {
-        Event event = eventRepo.getById(eventid);
+        Event event = eventRepo.findById(eventid)
+                .orElseThrow(() -> new EventNotDeletable("Der Event mit der ID " + eventid + "kann nicht gelöscht werden."));
         if(event.getEventValid()) {
-            eventRepo.deleteEventById(eventid)
-                    .orElseThrow(() -> new EventNotDeletable("Der Event mit der ID " + eventid + "kann nicht gelöscht werden."));
+            eventRepo.deleteById(eventid);
         }
     }
 

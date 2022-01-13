@@ -37,7 +37,7 @@ public class TeamService {
     }
 
     public void deleteTeam(Long id) {
-        teamRepo.deleteTeamById(id);
+        teamRepo.deleteById(id);
     }
 
     public Team findTeamById(Long id) {

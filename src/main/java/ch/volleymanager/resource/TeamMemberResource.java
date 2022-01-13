@@ -27,7 +27,7 @@ public class TeamMemberResource {
 
     @GetMapping("/find/{id}")
     public ResponseEntity<TeamMember> getTeammemberById(@PathVariable("id")Long id){
-        TeamMember teammember = teamMemberService.findTeammemberById(id);
+        TeamMember teammember = teamMemberService.findTeamMemberById(id);
         return new ResponseEntity<>(teammember, HttpStatus.OK);
     }
 
@@ -45,7 +45,7 @@ public class TeamMemberResource {
 
     @DeleteMapping("/delete{id}")
     public ResponseEntity<?> deleteTeammember(@PathVariable("id")Long id) {
-        teamMemberService.deleteTeammember(id);
+        teamMemberService.deleteTeamMember(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

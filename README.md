@@ -28,3 +28,19 @@ Daniel:
 
 Nice to have:
 - Spring Security
+
+## Zugriff auf H2-Konsole (bei aktivem H2 Profil)
+
+Der Inhalt der DB kann wie folgt betrachtet werden:
+
+[http://localhost:8080/h2-console ](http://localhost:8080/h2-console)
+
+<br>
+
+![h2-console.png](readme/h2-console.png)
+
+<br>
+
+![h2-db.jpg](readme/h2-db.jpg)
+
+<br>

@@ -9,9 +9,9 @@ import java.util.Optional;
 
 public interface AbstractPersonRepo extends JpaRepository<AbstractPerson, Long> {
     Optional<AbstractPerson> deletePersonById(Long id);
-    List<AbstractPerson> findAbstractPersonBy(Long id);
+    List<AbstractPerson> findAbstractPersonById(Long id);
 
     @Query
-    List<Long> findDistinctById();
+    List<Long> findDistinctById(Long id);
 
 }

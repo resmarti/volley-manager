@@ -7,23 +7,23 @@ import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
-@Table(name = "Event Table")
+@Table(name = "Event_Table")
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
     private Long eventId;
-    @Column(name = "Event name", nullable = false, updatable = true)
+    @Column(name = "Event_name", nullable = false, updatable = true)
     private String eventName;
-    @Column(name = "Event date", nullable = false, updatable = true)
+    @Column(name = "Event_date", nullable = false, updatable = true)
     private LocalDate eventDate;
-    @Column(name = "Ämtli", nullable = false, updatable = true)
+    @Column(name = "Aemtli", nullable = false, updatable = true)
     private String eventJob;
     @Column(name = "Ort", nullable = false, updatable = true)
     private String eventLocation;
-    @Column(name = "Number of helper", nullable = false, updatable = true)
+    @Column(name = "Number_of_helper", nullable = false, updatable = true)
     private int numberOfHelpersNeeded;
-    @Column(name = "Enough helpers?", nullable = false, updatable = true)
+    @Column(name = "Enough_helpers", nullable = false, updatable = true)
     private boolean numberOfHelpersOK;
     @ManyToMany
     @JoinTable(joinColumns = @JoinColumn(), inverseJoinColumns = @JoinColumn)
