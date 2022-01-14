@@ -20,8 +20,12 @@ public class AbstractPerson implements Serializable {
     private int postalCode;
     @Column(nullable = false, updatable = true)
     private String location;
+    @Column(nullable = false, updatable = true)
+    private String email;
+    @Column(nullable = false, updatable = true)
+    private String mobile;
 
-    public AbstractPerson(Long id, String firstName, String lastName, String street, int streetNb, int postalCode, String location) {
+    public AbstractPerson(Long id, String firstName, String lastName, String street, int streetNb, int postalCode, String location, String email, String mobile) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -29,6 +33,8 @@ public class AbstractPerson implements Serializable {
         this.streetNb = streetNb;
         this.postalCode = postalCode;
         this.location = location;
+        this.email= email;
+        this.mobile=mobile;
     }
 
     public AbstractPerson(){
@@ -90,8 +96,23 @@ public class AbstractPerson implements Serializable {
         this.location = location;
     }
 
+    public String getEmail() {
+        return email;
+    }
 
-@Override
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    @Override
 public String toString() {
     return "AbstractPerson{" +
             "id=" + id +
@@ -101,6 +122,8 @@ public String toString() {
             ",streetNb ='" + streetNb +'\'' +
             ",postalCode='" + postalCode +'\'' +
             ",location='" + location +'\'' +
+            ",email='" + email +'\'' +
+            ",mobile='" + mobile +'\'' +
             '}';
     }
 }
