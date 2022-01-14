@@ -7,6 +7,7 @@ import ch.volleymanager.exception.UserCanNotBeAdded;
 import ch.volleymanager.exception.UserCanNotBeDeleted;
 import ch.volleymanager.exception.UserNotFoundException;
 import ch.volleymanager.repo.TeamMemberRepo;
+import ch.volleymanager.repo.TeamRepo;
 import ch.volleymanager.resource.dto.TeamMemberDto;
 import ch.volleymanager.utils.FieldMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -22,12 +23,14 @@ import java.util.*;
 public class TeamMemberService {
     @Autowired
     private final TeamMemberRepo teamMemberRepo;
+    private final TeamRepo teamRepo;
 
     @Autowired
     private ModelMapper modelMapper;
 
-    public TeamMemberService(TeamMemberRepo teammemberRepo) {
+    public TeamMemberService(TeamMemberRepo teammemberRepo, TeamRepo teamRepo) {
         this.teamMemberRepo = teammemberRepo;
+        this.teamRepo = teamRepo;
     }
 
     public TeamMember addTeamMember(TeamMember teammember) {
@@ -51,6 +54,11 @@ public class TeamMemberService {
                 .orElseThrow(() -> new UserNotFoundException("Teammitglied " + id + "konnte nicht gefunden werden"));
     }
 
+    public Team findTeamById(Long id) {
+        return teamRepo.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("Teammitglied " + id + "konnte nicht gefunden werden"));
+    }
+
     //Add team member to team with check of the maxAge in class Team
     public Set<Team> addTeamMemberToTeam(Long id, Team team) {
         TeamMember teamMember = findTeamMemberById(id);
@@ -65,8 +73,9 @@ public class TeamMemberService {
         return teamMember.getTeams();
     }
 
-    public Set<Team> removeTeamMemberFromTeam(Long id, Team team){
-        TeamMember teamMember = findTeamMemberById(id);
+    public Set<Team> removeTeamMemberFromTeam(Long teamid, Long teammemberid){
+        TeamMember teamMember = findTeamMemberById(teammemberid);
+        Team team = findTeamById(teamid);
         if(team.getTeammembers().contains(teamMember)){
             teamMember.getTeams().remove(teamMember);
             team.getTeammembers().remove(team);

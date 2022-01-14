@@ -49,8 +49,8 @@ public TeamResource (TeamService teamService){
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping("/removeTeamMemberFromTeam{id}")
-    public ResponseEntity<?> removeTeamMemberFromTeam (@PathVariable("id")Long id, TeamMember teamMember){
+    @DeleteMapping("/removeteammemberfromteam/{teamid}/{teammemberid}")
+    public ResponseEntity<?> removeTeamMemberFromTeam (@PathVariable("teamid")Long teamid, @PathVariable("teammemberid")Long teammemberid){
         //teamService.removeTeamFromTeamMember(teamMember);
         return  new ResponseEntity<>(HttpStatus.OK);
     }
