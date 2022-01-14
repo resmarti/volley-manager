@@ -16,6 +16,7 @@ public class TeamMember extends AbstractPerson {
     @Column
     private LocalDate dateOfBirth;
     private boolean isCoach;
+    private boolean isPlayer;
     @ManyToOne
     private ContactPerson contactPerson;
     @JsonIgnore
@@ -31,12 +32,13 @@ public class TeamMember extends AbstractPerson {
     }
 
     public TeamMember(Long id, String firstName, String lastName, String street, int streetNb, int postalCode, String location,
-                      LocalDate dateOfBirth, ContactPerson contactPerson, Set<Team> teams, boolean isCoach) {
-        super(id, firstName, lastName, street, streetNb, postalCode, location);
+                      LocalDate dateOfBirth, ContactPerson contactPerson, Set<Team> teams, boolean isCoach, boolean isPlayer) {
+        super();
         this.dateOfBirth = dateOfBirth;
         this.contactPerson = contactPerson;
         this.teams = teams;
         this.isCoach = isCoach;
+        this.isPlayer=isPlayer;
     }
 
     public LocalDate getDateOfBirth() {
@@ -69,6 +71,14 @@ public class TeamMember extends AbstractPerson {
 
     public void setIsCoach(boolean coach) {
         isCoach = coach;
+    }
+
+    public boolean isPlayer() {
+        return isPlayer;
+    }
+
+    public void setPlayer(boolean player) {
+        isPlayer = player;
     }
 
     public Set<Event> getEvents() {
