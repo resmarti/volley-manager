@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class TeamMemberService {
@@ -49,14 +50,21 @@ public class TeamMemberService {
         teamMemberRepo.deleteById(id);
     }
 
+    public List<TeamMemberDto> deleteTeamMember1() {
+        List<TeamMember> teamMembers = teamMemberRepo.findAllWithEagerRelationships();
+        List<TeamMemberDto> teamMemberDtos = new ArrayList<>();
+        teamMembers.forEach(teamMember -> teamMemberDtos.remove(convertToDto(teamMember)));
+        return teamMemberDtos;
+    }
+
     public TeamMember findTeamMemberById(Long id) {
         return teamMemberRepo.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("Teammitglied " + id + "konnte nicht gefunden werden"));
+                .orElseThrow(() -> new UserNotFoundException());
     }
 
     public Team findTeamById(Long id) {
         return teamRepo.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("Teammitglied " + id + "konnte nicht gefunden werden"));
+                .orElseThrow(() -> new UserNotFoundException());
     }
 
     //Add team member to team with check of the maxAge in class Team
@@ -73,25 +81,45 @@ public class TeamMemberService {
         return teamMember.getTeams();
     }
 
-    public Set<Team> removeTeamMemberFromTeam(Long teamid, Long teammemberid){
+    public void removeTeamMemberFromTeam(Long teamid, Long teammemberid) {
         TeamMember teamMember = findTeamMemberById(teammemberid);
+        Long memberId = teamMember.getId();
         Team team = findTeamById(teamid);
-        if(team.getTeammembers().contains(teamMember)){
-            teamMember.getTeams().remove(teamMember);
-            team.getTeammembers().remove(team);
-        }throw new UserCanNotBeDeleted("Teammitglied kann nicht entfernt werden");
+        List<TeamMember> foundMembers = team.getTeammembers().stream()
+                .filter(member -> Objects.equals(member.getId(), memberId))
+                .collect(Collectors.toList());
+        if (foundMembers.size() > 0) {
+
+            Set<TeamMember> members = team.getTeammembers();
+            members = members.stream()
+                    .filter(member -> !member.getId().equals(memberId))
+                    .collect(Collectors.toSet());
+
+            Set<Team> teams = teamMember.getTeams();
+            teams = teams.stream()
+                    .filter(t -> !t.getTeamId().equals(teamid))
+                    .collect(Collectors.toSet());
+
+            team.setTeammembers(members);
+            teamMember.setTeams(teams);
+
+            teamMemberRepo.save(teamMember);
+            teamRepo.save(team);
+            return;
+        }
+        throw new UserCanNotBeDeleted();
     }
 
-    public Set<Event> addTeamMemberToEvent(Long id, Event event){
+    public Set<Event> addTeamMemberToEvent(Long id, Event event) {
         TeamMember teamMember = findTeamMemberById(id);
         teamMember.getEvents().add(event);
         event.getTeamMembers().add(teamMember);
-            return teamMember.getEvents();
+        return teamMember.getEvents();
     }
 
     public List<TeamMemberDto> findAllTeamMembersEager() {
-        List<TeamMember>teamMembers = teamMemberRepo.findAllWithEagerRelationships();
-        List<TeamMemberDto>teamMemberDtos = new ArrayList<>();
+        List<TeamMember> teamMembers = teamMemberRepo.findAllWithEagerRelationships();
+        List<TeamMemberDto> teamMemberDtos = new ArrayList<>();
         teamMembers.forEach(teamMember -> teamMemberDtos.add(convertToDto(teamMember)));
         return teamMemberDtos;
     }
@@ -100,9 +128,10 @@ public class TeamMemberService {
         return modelMapper.map(teamMember, TeamMemberDto.class);
     }
 
-    private TeamMember convertToEntity(TeamMemberDto teamMemberDto)  {
+    private TeamMember convertToEntity(TeamMemberDto teamMemberDto) {
         return modelMapper.map(teamMemberDto, TeamMember.class);
     }
+
 }
 
 

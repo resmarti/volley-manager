@@ -6,6 +6,9 @@
   "postalCode": 5000,
   "location": "Aarau",
   "dateOfBirth": "2008-03-03",
-  "isCoach": false
+  "isCoach": false,
+  "isPlayer": false,
+  "email": "y.huber@gmail.com",
+  "mobile": "077 777 77 77"
 
 }

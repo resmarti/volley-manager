@@ -25,7 +25,7 @@ public ContactPersonService(ContactPersonRepo contactPersonRepo, TeamMemberRepo 
     //Todo: ContactPerson can only be deleted when no player is attached
     public void deleteContactPersonById(Long id) throws ContactPersonNotDeletable {
         ContactPerson contactPerson = contactPersonRepo.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("Kontaktperson wurde nicht gefunden"));
+                .orElseThrow(() -> new UserNotFoundException());
 
         if (contactPerson.getTeamMembers().isEmpty()){
             contactPersonRepo.delete(contactPerson);
@@ -35,12 +35,12 @@ public ContactPersonService(ContactPersonRepo contactPersonRepo, TeamMemberRepo 
 
         //Find Player by Id
         TeamMember teamMember = teamMemberRepo.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("Die Person mit der ID " + id + " wurde nicht gefunden."));
+                .orElseThrow(() -> new UserNotFoundException());
 
     }
 
     public ContactPerson addContactPersonToMember(Long memberId, boolean shouldUseTheSameAddress) {
-        TeamMember teamMember = teamMemberRepo.findById(memberId).orElseThrow(() -> new UserNotFoundException("contactPerson Not Found"));
+        TeamMember teamMember = teamMemberRepo.findById(memberId).orElseThrow(() -> new UserNotFoundException());
 
         ContactPerson contactPerson = new ContactPerson();
         contactPerson.getTeamMembers().add(teamMember);

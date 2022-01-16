@@ -27,9 +27,12 @@ public class ContactPersonTest {
                         1,
                         5000,
                         "Aarau",
+                        "email",
+                        "mobile",
                         LocalDate.of(2008, 3, 3),
                         null,
                         null,
+                        false,
                         false
                 )
         );

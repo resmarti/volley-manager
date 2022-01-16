@@ -15,18 +15,18 @@ import java.util.List;
 public class TeamResource {
     private final TeamService teamService;
 
-public TeamResource (TeamService teamService){
-    this.teamService = teamService;
-}
+    public TeamResource(TeamService teamService) {
+        this.teamService = teamService;
+    }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Team>> getAllTeams(){
+    public ResponseEntity<List<Team>> getAllTeams() {
         List<Team> teams = teamService.findAllTeams();
         return new ResponseEntity<>(teams, HttpStatus.OK);
     }
 
     @GetMapping("/find/{id}")
-    public ResponseEntity<Team> getTeamById(@PathVariable("id")Long id){
+    public ResponseEntity<Team> getTeamById(@PathVariable("id") Long id) {
         Team team = teamService.findTeamById(id);
         return new ResponseEntity<>(team, HttpStatus.OK);
     }
@@ -44,22 +44,16 @@ public TeamResource (TeamService teamService){
     }
 
     @DeleteMapping("/delete{id}")
-    public ResponseEntity<?> deleteTeam(@PathVariable("id")Long id) {
+    public ResponseEntity<?> deleteTeam(@PathVariable("id") Long id) {
         teamService.deleteTeam(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping("/removeteammemberfromteam/{teamid}/{teammemberid}")
-    public ResponseEntity<?> removeTeamMemberFromTeam (@PathVariable("teamid")Long teamid, @PathVariable("teammemberid")Long teammemberid){
-        //teamService.removeTeamFromTeamMember(teamMember);
-        return  new ResponseEntity<>(HttpStatus.OK);
-    }
-
     @PutMapping("/addTeamToEvent")
-    public ResponseEntity<Team>addTeamToEvent(Long teamId, @RequestBody Event event){
+    public ResponseEntity<Team> addTeamToEvent(Long teamId, @RequestBody Event event) {
 
-    teamService.addTeamToEvent(teamId, event);
-    return new ResponseEntity<>(HttpStatus.OK);
+        teamService.addTeamToEvent(teamId, event);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

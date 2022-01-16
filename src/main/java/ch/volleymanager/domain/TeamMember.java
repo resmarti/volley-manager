@@ -31,9 +31,22 @@ public class TeamMember extends AbstractPerson {
     public TeamMember(){
     }
 
-    public TeamMember(Long id, String firstName, String lastName, String street, int streetNb, int postalCode, String location,
-                      LocalDate dateOfBirth, ContactPerson contactPerson, Set<Team> teams, boolean isCoach, boolean isPlayer) {
-        super();
+    public TeamMember(Long id,
+                      String firstName,
+                      String lastName,
+                      String street,
+                      int streetNb,
+                      int postalCode,
+                      String location,
+                      String email,
+                      String mobile,
+                      LocalDate dateOfBirth,
+                      ContactPerson contactPerson,
+                      Set<Team> teams,
+                      boolean isCoach,
+                      boolean isPlayer
+    ) {
+        super(id, firstName, lastName, street, streetNb, postalCode, location, email, mobile);
         this.dateOfBirth = dateOfBirth;
         this.contactPerson = contactPerson;
         this.teams = teams;
