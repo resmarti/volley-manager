@@ -17,19 +17,20 @@ public class ContactPersonTest {
         cp.setLocation("Aarau");
         cp.setPostalCode(5000);
         cp.setStreet("Bahnhofstrasse");
-        cp.setStreetNb(1);
+        cp.setStreetNb("1");
         cp.addTeamMember(
                 new TeamMember(
                         null,
                         "Anna",
                         "Muster",
                         "Bahnhofstrasse",
-                        1,
+                        "1",
                         5000,
                         "Aarau",
                         "email",
                         "mobile",
                         LocalDate.of(2008, 3, 3),
+                        "f",
                         null,
                         null,
                         false,

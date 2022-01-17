@@ -15,6 +15,7 @@ public class TeamMember extends AbstractPerson {
 
     @Column
     private LocalDate dateOfBirth;
+    private String gender;
     private boolean isCoach;
     private boolean isPlayer;
     @ManyToOne
@@ -35,12 +36,13 @@ public class TeamMember extends AbstractPerson {
                       String firstName,
                       String lastName,
                       String street,
-                      int streetNb,
+                      String streetNb,
                       int postalCode,
                       String location,
                       String email,
                       String mobile,
                       LocalDate dateOfBirth,
+                      String gender,
                       ContactPerson contactPerson,
                       Set<Team> teams,
                       boolean isCoach,
@@ -48,10 +50,11 @@ public class TeamMember extends AbstractPerson {
     ) {
         super(id, firstName, lastName, street, streetNb, postalCode, location, email, mobile);
         this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
         this.contactPerson = contactPerson;
         this.teams = teams;
         this.isCoach = isCoach;
-        this.isPlayer=isPlayer;
+        this.isPlayer = isPlayer;
     }
 
     public LocalDate getDateOfBirth() {
@@ -60,6 +63,14 @@ public class TeamMember extends AbstractPerson {
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public ContactPerson getContactPerson() {
@@ -86,11 +97,11 @@ public class TeamMember extends AbstractPerson {
         isCoach = coach;
     }
 
-    public boolean isPlayer() {
+    public boolean isIsPlayer() {
         return isPlayer;
     }
 
-    public void setPlayer(boolean player) {
+    public void setIsPlayer(boolean player) {
         isPlayer = player;
     }
 

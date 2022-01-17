@@ -50,13 +50,13 @@ public class TeamMemberResource {
         return new ResponseEntity<>(updateTeamMember, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteTeamMember(@PathVariable("id")Long id) {
         teamMemberService.deleteTeamMember(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete1{id}")
+    @DeleteMapping("/delete1/{id}")
     public ResponseEntity<?> deleteTeamMember1(@PathVariable("id")Long id){
         teamMemberService.deleteTeamMember1();
         return new ResponseEntity<>(HttpStatus.OK);

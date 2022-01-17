@@ -43,7 +43,7 @@ public class TeamResource {
         return new ResponseEntity<>(updateTeam, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteTeam(@PathVariable("id") Long id) {
         teamService.deleteTeam(id);
         return new ResponseEntity<>(HttpStatus.OK);

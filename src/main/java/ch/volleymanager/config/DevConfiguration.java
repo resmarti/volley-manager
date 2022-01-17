@@ -66,9 +66,9 @@ public class DevConfiguration implements HasLogger {
     }
 
     private void createPersonData() {
-        ContactPerson cpFelixMuster = new ContactPerson(null, "Felix", "Muster", "Bahnhofstrasse", 1, 5000, "Aarau", "mobile079", "email@test.ch");
-        ContactPerson cpMaxMusterMann = new ContactPerson(null, "Max", "Mustermann", "Alpenblick", 1, 3000, "Bern", "mobile079", "email@test.ch");
-        ContactPerson cpJohnDoe = new ContactPerson(null, "John", "Doe", "Lagerstrasse", 41, 8004, "Zürich", "mobile079", "email@test.ch");
+        ContactPerson cpFelixMuster = new ContactPerson(null, "Felix", "Muster", "Bahnhofstrasse", "1", 5000, "Aarau", "mobile079", "email@test.ch");
+        ContactPerson cpMaxMusterMann = new ContactPerson(null, "Max", "Mustermann", "Alpenblick", "1", 3000, "Bern", "mobile079", "email@test.ch");
+        ContactPerson cpJohnDoe = new ContactPerson(null, "John", "Doe", "Lagerstrasse", "41", 8004, "Zürich", "mobile079", "email@test.ch");
 
         cpFelixMuster = contactPersonRepo.save(cpFelixMuster);
         cpMaxMusterMann = contactPersonRepo.save(cpMaxMusterMann);
@@ -98,15 +98,15 @@ public class DevConfiguration implements HasLogger {
 
     private void createTeamMemberData() {
 
-        TeamMember teamMemberAnnaMuster14Years = new TeamMember(null, "Anna", "Muster", "Bahnhofstrasse", 1, 5000, "Aarau", "mobile079", "email@test.ch",  LocalDate.of(2008, 3, 3), null, null, false, false);
+        TeamMember teamMemberAnnaMuster14Years = new TeamMember(null, "Anna", "Muster", "Bahnhofstrasse", "1", 5000, "Aarau", "mobile079", "email@test.ch",  LocalDate.of(2008, 3, 3), "f", null, null, false, true);
         teamMemberAnnaMuster14Years = teamMemberRepo.save(teamMemberAnnaMuster14Years);
         teamMemberAnnaMuster14YearsId = teamMemberAnnaMuster14Years.getId();
 
-        TeamMember teamMemberJuliaMustermann14Years = new TeamMember(null, "Julia", "Mustermann", "Alpenblick", 1, 3000, "Bern", "mobile079", "email@test.ch",  LocalDate.of(2008, 4, 3), null, null, false, false);
+        TeamMember teamMemberJuliaMustermann14Years = new TeamMember(null, "Julia", "Mustermann", "Alpenblick", "1", 3000, "Bern", "mobile079", "email@test.ch",  LocalDate.of(2008, 4, 3), "f", null, null, false, true);
         teamMemberJuliaMustermann14Years = teamMemberRepo.save(teamMemberJuliaMustermann14Years);
         teamMemberJuliaMustermann14YearsId = teamMemberJuliaMustermann14Years.getId();
 
-        TeamMember teamMemberJennyDoe14Years = new TeamMember(null, "Anna", "Muster", "Lagerstrasse", 41, 8004, "Zürich", "mobile079", "email@test.ch", LocalDate.of(2008, 5, 3), null, null, false, false);
+        TeamMember teamMemberJennyDoe14Years = new TeamMember(null, "Anna", "Muster", "Lagerstrasse", "41", 8004, "Zürich", "mobile079", "email@test.ch", LocalDate.of(2008, 5, 3), "f", null, null, false, true);
         teamMemberJennyDoe14Years = teamMemberRepo.save(teamMemberJennyDoe14Years);
         teamMemberJennyDoe14YearsId = teamMemberJennyDoe14Years.getId();
     }

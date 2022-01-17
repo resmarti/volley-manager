@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class ContactPersonDto extends AbstractPerson {
 
-    public ContactPersonDto(Long id, String firstName, String lastName, String street, int streetNb, int postalCode, String location, String email, String mobile) {
+    public ContactPersonDto(Long id, String firstName, String lastName, String street, String streetNb, int postalCode, String location, String email, String mobile) {
         super (id, firstName, lastName, street, streetNb, postalCode, location, email, mobile);
     }
 

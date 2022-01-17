@@ -15,7 +15,7 @@ public class AbstractPerson implements Serializable {
     @Column(nullable = false)
     private String street;
     @Column(nullable = false, updatable = true)
-    private int streetNb;
+    private String streetNb;
     @Column(nullable = false, updatable = true)
     private int postalCode;
     @Column(nullable = false, updatable = true)
@@ -25,7 +25,7 @@ public class AbstractPerson implements Serializable {
     @Column(nullable = false, updatable = true)
     private String mobile;
 
-    public AbstractPerson(Long id, String firstName, String lastName, String street, int streetNb, int postalCode, String location, String email, String mobile) {
+    public AbstractPerson(Long id, String firstName, String lastName, String street, String streetNb, int postalCode, String location, String email, String mobile) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -72,11 +72,11 @@ public class AbstractPerson implements Serializable {
         this.street = street;
     }
 
-    public int getStreetNb() {
+    public String getStreetNb() {
         return streetNb;
     }
 
-    public void setStreetNb(int streetNb) {
+    public void setStreetNb(String streetNb) {
         this.streetNb = streetNb;
     }
 

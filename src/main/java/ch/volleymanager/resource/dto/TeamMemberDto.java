@@ -8,6 +8,7 @@ import java.util.Set;
 public class TeamMemberDto extends AbstractPersonDto {
 
     private LocalDate dateOfBirth;
+    private String gender;
     private boolean isCoach;
     private ContactPersonSimpleDto contactPerson;
     private Set<TeamSimpleDto> teams = new HashSet<>();
@@ -16,10 +17,11 @@ public class TeamMemberDto extends AbstractPersonDto {
     public TeamMemberDto(){
     }
 
-    public TeamMemberDto(Long id, String firstName, String lastName, String street, int streetNb, int postalCode, String location,
-                      LocalDate dateOfBirth, ContactPersonSimpleDto contactPerson, Set<TeamSimpleDto> teams, boolean isCoach) {
+    public TeamMemberDto(Long id, String firstName, String lastName, String street, String streetNb, int postalCode, String location,
+                      LocalDate dateOfBirth, String gender, ContactPersonSimpleDto contactPerson, Set<TeamSimpleDto> teams, boolean isCoach) {
         super(id, firstName, lastName, street, streetNb, postalCode, location);
         this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
         this.contactPerson = contactPerson;
         this.teams = teams;
         this.isCoach = isCoach;
@@ -31,6 +33,12 @@ public class TeamMemberDto extends AbstractPersonDto {
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getGender() { return gender; }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public ContactPersonSimpleDto getContactPerson() {

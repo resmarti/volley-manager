@@ -12,13 +12,13 @@ public class AbstractPersonDto {
 
     private String street;
 
-    private int streetNb;
+    private String streetNb;
 
     private int postalCode;
 
     private String location;
 
-    public AbstractPersonDto(Long id, String firstName, String lastName, String street, int streetNb, int postalCode, String location) {
+    public AbstractPersonDto(Long id, String firstName, String lastName, String street, String streetNb, int postalCode, String location) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -63,11 +63,11 @@ public class AbstractPersonDto {
         this.street = street;
     }
 
-    public int getStreetNb() {
+    public String getStreetNb() {
         return streetNb;
     }
 
-    public void setStreetNb(int streetNb) {
+    public void setStreetNb(String streetNb) {
         this.streetNb = streetNb;
     }
 
