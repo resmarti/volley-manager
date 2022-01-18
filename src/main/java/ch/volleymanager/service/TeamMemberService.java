@@ -1,15 +1,19 @@
 package ch.volleymanager.service;
 
+import ch.volleymanager.domain.ContactPerson;
 import ch.volleymanager.domain.Event;
 import ch.volleymanager.domain.Team;
 import ch.volleymanager.domain.TeamMember;
 import ch.volleymanager.exception.UserCanNotBeAdded;
 import ch.volleymanager.exception.UserCanNotBeDeleted;
 import ch.volleymanager.exception.UserNotFoundException;
+import ch.volleymanager.repo.ContactPersonRepo;
+import ch.volleymanager.repo.EventRepo;
 import ch.volleymanager.repo.TeamMemberRepo;
 import ch.volleymanager.repo.TeamRepo;
 import ch.volleymanager.resource.dto.TeamMemberDto;
 import ch.volleymanager.utils.FieldMapper;
+import ch.volleymanager.utils.HasLogger;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +25,21 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class TeamMemberService {
+public class TeamMemberService implements HasLogger {
     @Autowired
     private final TeamMemberRepo teamMemberRepo;
     private final TeamRepo teamRepo;
+    private final EventRepo eventRepo;
+    private final ContactPersonRepo contactPersonRepo;
 
     @Autowired
     private ModelMapper modelMapper;
 
-    public TeamMemberService(TeamMemberRepo teammemberRepo, TeamRepo teamRepo) {
+    public TeamMemberService(TeamMemberRepo teammemberRepo, TeamRepo teamRepo, ContactPersonRepo contactPersonRepo, EventRepo eventRepo) {
         this.teamMemberRepo = teammemberRepo;
         this.teamRepo = teamRepo;
+        this.eventRepo = eventRepo;
+        this.contactPersonRepo = contactPersonRepo;
     }
 
     public TeamMember addTeamMember(TeamMember teammember) {
@@ -47,6 +55,23 @@ public class TeamMemberService {
     }
 
     public void deleteTeamMember(Long id) {
+        Optional<TeamMember> teamMember = teamMemberRepo.findByIdWithEagerRelationships(id);
+        if(teamMember.isPresent()) {
+            //remove from each Team that they belong to
+            Set<Team> teams = teamMember.get().getTeams();
+            teams.forEach(team -> this.removeTeamMemberFromTeam(team.getTeamId(), teamMember.get().getId()));
+            //remove the contact Person if it exists
+            if (teamMember.get().getContactPerson()!=null) {
+                ContactPerson contactPerson = teamMember.get().getContactPerson();
+                //contactPerson.removeTeamMember(teamMember.get());
+                teamMember.get().removeContactPerson();
+                teamMemberRepo.save(teamMember.get());
+                contactPersonRepo.save(contactPerson);
+            }
+            //remove all events if there are any connections
+            Set<Event> events = teamMember.get().getEvents();
+            events.forEach(event -> this.removeTeamMemberFromEvent(event.getEventId(), teamMember.get().getId()));
+        }
         teamMemberRepo.deleteById(id);
     }
 
@@ -64,6 +89,11 @@ public class TeamMemberService {
 
     public Team findTeamById(Long id) {
         return teamRepo.findById(id)
+                .orElseThrow(() -> new UserNotFoundException());
+    }
+
+    public Event findEventById(Long id) {
+        return eventRepo.findById(id)
                 .orElseThrow(() -> new UserNotFoundException());
     }
 
@@ -105,6 +135,35 @@ public class TeamMemberService {
 
             teamMemberRepo.save(teamMember);
             teamRepo.save(team);
+            return;
+        }
+        throw new UserCanNotBeDeleted();
+    }
+
+    public void removeTeamMemberFromEvent(Long eventid, Long teammemberid) {
+        TeamMember teamMember = findTeamMemberById(teammemberid);
+        Long memberId = teamMember.getId();
+        Event event = findEventById(eventid);
+        List<TeamMember> foundMembers = event.getTeamMembers().stream()
+                .filter(member -> Objects.equals(member.getId(), memberId))
+                .collect(Collectors.toList());
+        if (foundMembers.size() > 0) {
+
+            Set<TeamMember> members = event.getTeamMembers();
+            members = members.stream()
+                    .filter(member -> !member.getId().equals(memberId))
+                    .collect(Collectors.toSet());
+
+            Set<Event> events = teamMember.getEvents();
+            events = events.stream()
+                    .filter(t -> !t.getEventId().equals(eventid))
+                    .collect(Collectors.toSet());
+
+            event.setTeamMembers(members);
+            teamMember.setEvents(events);
+
+            teamMemberRepo.save(teamMember);
+            eventRepo.save(event);
             return;
         }
         throw new UserCanNotBeDeleted();

@@ -1,6 +1,7 @@
 package ch.volleymanager.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -22,6 +23,7 @@ public class TeamMember extends AbstractPerson {
     private ContactPerson contactPerson;
     @JsonIgnore
     @ManyToMany
+    @Cascade(value = org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
     @LazyCollection (LazyCollectionOption.FALSE)
     private Set<Team> teams = new HashSet<>();
     @JsonIgnore
@@ -79,6 +81,10 @@ public class TeamMember extends AbstractPerson {
 
     public void setContactPerson(ContactPerson contactPerson) {
         this.contactPerson = contactPerson;
+    }
+
+    public void removeContactPerson() {
+        this.contactPerson = null;
     }
 
     public Set<Team> getTeams() {

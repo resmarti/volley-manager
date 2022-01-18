@@ -23,7 +23,7 @@ public class Team {
     @JsonIgnore
     @LazyCollection(LazyCollectionOption.FALSE)
     private Set <Event> events = new HashSet<>();
-    @ManyToMany
+    @ManyToMany(mappedBy = "teams")
     @JsonIgnore
     @LazyCollection (LazyCollectionOption.FALSE)
     private Set <TeamMember> teamMembers = new HashSet<>();
