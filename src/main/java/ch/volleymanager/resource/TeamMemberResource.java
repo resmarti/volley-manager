@@ -68,9 +68,9 @@ public class TeamMemberResource {
         return  new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/addTeamMemberToTeam")
-    public ResponseEntity<Set<Team>> addTeamMemberToTeam(Long memberId, Team team){
-        Set<Team> newTeamMember = teamMemberService.addTeamMemberToTeam(memberId, team);
+    @PutMapping("/addteammembertoteam/{teamid}/{teammemberid}")
+    public ResponseEntity<Set<Team>> addTeamMemberToTeam(@PathVariable("teammemberid") Long teammemberid, @PathVariable("teamid")Long teamid ){
+        Set<Team> newTeamMember = teamMemberService.addTeamMemberToTeam(teammemberid, teamid);
         return new ResponseEntity<>(newTeamMember, HttpStatus.CREATED);
     }
 

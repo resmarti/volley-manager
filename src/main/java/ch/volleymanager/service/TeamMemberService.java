@@ -98,12 +98,15 @@ public class TeamMemberService implements HasLogger {
     }
 
     //Add team member to team with check of the maxAge in class Team
-    public Set<Team> addTeamMemberToTeam(Long id, Team team) {
-        TeamMember teamMember = findTeamMemberById(id);
+    public Set<Team> addTeamMemberToTeam(Long teammemberId, Long teamId) {
+        TeamMember teamMember = findTeamMemberById(teammemberId);
+        Team team = findTeamById(teamId);
 
         if (team.getMaxAge() >= teamMember.calculateAge()) {
             teamMember.getTeams().add(team);
             team.getTeammembers().add(teamMember);
+            teamMemberRepo.save(teamMember);
+            teamRepo.save(team);
         } else {
             throw new UserCanNotBeAdded("Teammitglied kann nicht hinzugefügt werden");
         }
