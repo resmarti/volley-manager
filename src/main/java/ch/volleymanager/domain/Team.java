@@ -19,11 +19,11 @@ public class Team {
     @Column(nullable = false, updatable = true)
     private int maxAge;
     @Column (nullable = false, updatable = true)
-    @ManyToMany
+    @ManyToMany (fetch = FetchType.EAGER)
     @JsonIgnore
     @LazyCollection(LazyCollectionOption.FALSE)
     private Set <Event> events = new HashSet<>();
-    @ManyToMany(mappedBy = "teams")
+    @ManyToMany(mappedBy = "teams", fetch = FetchType.EAGER)
     @JsonIgnore
     @LazyCollection (LazyCollectionOption.FALSE)
     private Set <TeamMember> teamMembers = new HashSet<>();

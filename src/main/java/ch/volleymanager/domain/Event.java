@@ -29,12 +29,13 @@ public class Event {
     private int numberOfHelpersNeeded;
     @Column(name = "Enough_helpers", nullable = false, updatable = true)
     private boolean numberOfHelpersOK;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(joinColumns = @JoinColumn(), inverseJoinColumns = @JoinColumn)
     @JsonIgnore
     @LazyCollection(LazyCollectionOption.FALSE)
     private Set<TeamMember> teamMembers;
-    @ManyToMany
+
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(joinColumns = @JoinColumn(), inverseJoinColumns =@JoinColumn)
     @JsonIgnore
     @LazyCollection (LazyCollectionOption.FALSE)

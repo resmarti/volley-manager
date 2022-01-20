@@ -21,13 +21,14 @@ public class TeamMember extends AbstractPerson {
     private boolean isPlayer;
     @ManyToOne
     private ContactPerson contactPerson;
+
     @JsonIgnore
-    @ManyToMany
-    @Cascade(value = org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
+    @ManyToMany(fetch = FetchType.EAGER)
     @LazyCollection (LazyCollectionOption.FALSE)
     private Set<Team> teams = new HashSet<>();
+
     @JsonIgnore
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @LazyCollection(LazyCollectionOption.FALSE)
     private Set<Event> events = new HashSet<>();
 

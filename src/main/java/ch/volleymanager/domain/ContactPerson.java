@@ -18,7 +18,7 @@ public class ContactPerson extends AbstractPerson {
     public ContactPerson(){
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "contactPerson", orphanRemoval = true, cascade = CascadeType.ALL )
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "contactPerson", orphanRemoval = true, cascade = CascadeType.ALL )
     @LazyCollection(LazyCollectionOption.FALSE)
     @JsonIgnore
     private Set<TeamMember> teamMembers = new HashSet<>();

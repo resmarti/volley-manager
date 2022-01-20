@@ -75,6 +75,8 @@ public class TeamMemberService implements HasLogger {
         teamMemberRepo.deleteById(id);
     }
 
+
+    //Delete TeamMember
     public List<TeamMemberDto> deleteTeamMember1() {
         List<TeamMember> teamMembers = teamMemberRepo.findAllWithEagerRelationships();
         List<TeamMemberDto> teamMemberDtos = new ArrayList<>();
@@ -108,12 +110,13 @@ public class TeamMemberService implements HasLogger {
             teamMemberRepo.save(teamMember);
             teamRepo.save(team);
         } else {
-            throw new UserCanNotBeAdded("Teammitglied kann nicht hinzugefügt werden");
+            throw new UserCanNotBeAdded();
         }
 
         return teamMember.getTeams();
     }
 
+    //deletes Teammember from Team if the teammember is actually in the Teamlist
     public void removeTeamMemberFromTeam(Long teamid, Long teammemberid) {
         TeamMember teamMember = findTeamMemberById(teammemberid);
         Long memberId = teamMember.getId();
@@ -172,7 +175,7 @@ public class TeamMemberService implements HasLogger {
         throw new UserCanNotBeDeleted();
     }
 
-    public Set<Event> addTeamMemberToEvent(Long id, Event event) {
+    public Set<Event> addTeamMemberToEvent(Long id, Long event) {
         TeamMember teamMember = findTeamMemberById(id);
         teamMember.getEvents().add(event);
         event.getTeamMembers().add(teamMember);

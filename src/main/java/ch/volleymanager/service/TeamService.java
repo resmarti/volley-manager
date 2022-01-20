@@ -1,10 +1,12 @@
 package ch.volleymanager.service;
 
+import ch.volleymanager.domain.ContactPerson;
 import ch.volleymanager.domain.Event;
 import ch.volleymanager.domain.Team;
 import ch.volleymanager.domain.TeamMember;
 import ch.volleymanager.exception.TeamNotFoundException;
 import ch.volleymanager.repo.TeamRepo;
+import ch.volleymanager.resource.dto.TeamDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -37,8 +40,9 @@ public class TeamService {
     }
 
     public void deleteTeam(Long id) {
-        teamRepo.deleteById(id);
+          teamRepo.deleteById(id);
     }
+
 
     public Team findTeamById(Long id) {
         return teamRepo.findById(id)
@@ -51,6 +55,7 @@ public class TeamService {
         event.getTeams().add(team);
         return team.getEvents();
     }
+
 
 
 }
