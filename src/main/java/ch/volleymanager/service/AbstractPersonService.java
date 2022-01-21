@@ -16,12 +16,4 @@ public class AbstractPersonService {
         this.abstractPersonRepo = abstractPersonRepo;
     }
 
-    //Todo: Find Player by Name
-
-    //Todo: Find Team
-
-    //Todo: List Events by Team
-
-    // Todo: List Events by AbstractPerson (Coach, Player)
-
 }

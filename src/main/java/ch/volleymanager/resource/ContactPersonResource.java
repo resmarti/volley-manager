@@ -47,5 +47,5 @@ public class ContactPersonResource {
         contactPersonService.deleteContactPersonById(contactpersonid);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    
-}
+
+  }
