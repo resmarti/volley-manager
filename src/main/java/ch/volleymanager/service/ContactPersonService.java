@@ -5,10 +5,13 @@ import ch.volleymanager.exception.ContactPersonNotDeletable;
 import ch.volleymanager.exception.UserNotFoundException;
 import ch.volleymanager.repo.ContactPersonRepo;
 import ch.volleymanager.repo.TeamMemberRepo;
+import ch.volleymanager.resource.dto.ContactPersonDto;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -16,11 +19,45 @@ public class ContactPersonService {
     private final ContactPersonRepo contactPersonRepo;
     private final TeamMemberRepo teamMemberRepo;
 
-@Autowired
-public ContactPersonService(ContactPersonRepo contactPersonRepo, TeamMemberRepo teamMemberRepo) {
-    this.contactPersonRepo = contactPersonRepo;
-    this.teamMemberRepo=teamMemberRepo;
-}
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @Autowired
+    public ContactPersonService(ContactPersonRepo contactPersonRepo, TeamMemberRepo teamMemberRepo) {
+        this.contactPersonRepo = contactPersonRepo;
+        this.teamMemberRepo=teamMemberRepo;
+    }
+
+    public List<ContactPerson> findAllContactPersons() {
+        return contactPersonRepo.findAll();
+    }
+
+    public ContactPerson updateContactPerson(ContactPerson contactPerson) {
+        return contactPersonRepo.save(contactPerson);
+    }
+
+    public ContactPerson assignNewContactPersonToTeamMember(ContactPerson contactPerson, Long teamMemberId) {
+        teamMemberRepo.findByIdWithEagerRelationships(teamMemberId).ifPresent(teamMember -> {
+            teamMember.setContactPerson(contactPerson);
+            contactPerson.addTeamMember(teamMember);
+            teamMemberRepo.save(teamMember);
+            contactPersonRepo.save(contactPerson);
+        });
+        return contactPerson;
+    }
+
+    public void assignExistingContactPersonToTeamMember(Long contactId, Long teamMemberId) {
+
+        contactPersonRepo.findByIdWithEagerRelationships(contactId).ifPresent(contactPerson -> {
+            teamMemberRepo.findByIdWithEagerRelationships(teamMemberId).ifPresent(teamMember -> {
+                teamMember.setContactPerson(contactPerson);
+                contactPerson.addTeamMember(teamMember);
+                teamMemberRepo.save(teamMember);
+                contactPersonRepo.save(contactPerson);
+            });
+        });
+
+    }
 
     //Todo: ContactPerson can only be deleted when no player is attached
     public void deleteContactPersonById(Long id) throws ContactPersonNotDeletable {
@@ -52,6 +89,14 @@ public ContactPersonService(ContactPersonRepo contactPersonRepo, TeamMemberRepo 
         }
 
         return contactPersonRepo.save(contactPerson);
+    }
+
+    private ContactPersonDto convertToDto(ContactPerson contactPerson) {
+        return modelMapper.map(contactPerson, ContactPersonDto.class);
+    }
+
+    private ContactPerson convertToEntity(ContactPersonDto contactPersonDto) {
+        return modelMapper.map(contactPersonDto, ContactPerson.class);
     }
 
 }

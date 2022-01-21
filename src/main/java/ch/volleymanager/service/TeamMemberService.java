@@ -14,7 +14,6 @@ import ch.volleymanager.repo.TeamRepo;
 import ch.volleymanager.resource.dto.TeamMemberDto;
 import ch.volleymanager.utils.FieldMapper;
 import ch.volleymanager.utils.HasLogger;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

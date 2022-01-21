@@ -18,6 +18,8 @@ public class ContactPersonTest {
         cp.setPostalCode(5000);
         cp.setStreet("Bahnhofstrasse");
         cp.setStreetNb("1");
+        cp.setEmail("mail@test.ch");
+        cp.setMobile("+41 77 777 77 77");
         cp.addTeamMember(
                 new TeamMember(
                         null,
@@ -38,7 +40,7 @@ public class ContactPersonTest {
                 )
         );
 
-        String temp = "AbstractPerson{id=1,firstName='Felix',lastName='Muster',street='Bahnhofstrasse',streetNb ='1',postalCode='5000',location='Aarau'}";
+        String temp = "AbstractPerson{id=1,firstName='Felix',lastName='Muster',street='Bahnhofstrasse',streetNb ='1',postalCode='5000',location='Aarau',email='mail@test.ch',mobile='+41 77 777 77 77'}";
         assertThat(temp).isEqualTo(cp.toString());
 
     }
