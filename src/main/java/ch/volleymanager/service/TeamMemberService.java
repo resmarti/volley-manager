@@ -4,6 +4,7 @@ import ch.volleymanager.domain.ContactPerson;
 import ch.volleymanager.domain.Event;
 import ch.volleymanager.domain.Team;
 import ch.volleymanager.domain.TeamMember;
+import ch.volleymanager.exception.TeamNotFoundException;
 import ch.volleymanager.exception.UserCanNotBeAdded;
 import ch.volleymanager.exception.UserCanNotBeDeleted;
 import ch.volleymanager.exception.UserNotFoundException;
@@ -12,15 +13,11 @@ import ch.volleymanager.repo.EventRepo;
 import ch.volleymanager.repo.TeamMemberRepo;
 import ch.volleymanager.repo.TeamRepo;
 import ch.volleymanager.resource.dto.TeamMemberDto;
-import ch.volleymanager.utils.FieldMapper;
 import ch.volleymanager.utils.HasLogger;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.text.ParseException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -77,12 +74,14 @@ public class TeamMemberService implements HasLogger {
 
 
     //Delete TeamMember
-    public List<TeamMemberDto> deleteTeamMember1() {
+    /*public List<TeamMemberDto> deleteTeamMember1() {
         List<TeamMember> teamMembers = teamMemberRepo.findAllWithEagerRelationships();
         List<TeamMemberDto> teamMemberDtos = new ArrayList<>();
         teamMembers.forEach(teamMember -> teamMemberDtos.remove(convertToDto(teamMember)));
         return teamMemberDtos;
     }
+    */
+
 
     public TeamMember findTeamMemberById(Long id) {
         return teamMemberRepo.findById(id)
@@ -91,7 +90,7 @@ public class TeamMemberService implements HasLogger {
 
     public Team findTeamById(Long id) {
         return teamRepo.findById(id)
-                .orElseThrow(() -> new UserNotFoundException());
+                .orElseThrow(() -> new TeamNotFoundException("Team " + id + "konnte nicht gefunden werden"));
     }
 
     public Event findEventById(Long id) {
@@ -146,7 +145,7 @@ public class TeamMemberService implements HasLogger {
         throw new UserCanNotBeDeleted();
     }
 
-    public void removeTeamMemberFromEvent(Long eventid, Long teammemberid) {
+    public Set<Event> removeTeamMemberFromEvent(Long eventid, Long teammemberid) {
         TeamMember teamMember = findTeamMemberById(teammemberid);
         Long memberId = teamMember.getId();
         Event event = findEventById(eventid);
@@ -170,15 +169,19 @@ public class TeamMemberService implements HasLogger {
 
             teamMemberRepo.save(teamMember);
             eventRepo.save(event);
-            return;
+            return events;
         }
         throw new UserCanNotBeDeleted();
     }
 
-    public Set<Event> addTeamMemberToEvent(Long id, Long event) {
-        TeamMember teamMember = findTeamMemberById(id);
+    public Set<Event> addTeamMemberToEvent(Long teammemberid, Long eventid) {
+        TeamMember teamMember = findTeamMemberById(teammemberid);
+        Event event = findEventById(eventid);
+
         teamMember.getEvents().add(event);
         event.getTeamMembers().add(teamMember);
+        teamMemberRepo.save(teamMember);
+        eventRepo.save(event);
         return teamMember.getEvents();
     }
 
@@ -191,10 +194,6 @@ public class TeamMemberService implements HasLogger {
 
     private TeamMemberDto convertToDto(TeamMember teamMember) {
         return modelMapper.map(teamMember, TeamMemberDto.class);
-    }
-
-    private TeamMember convertToEntity(TeamMemberDto teamMemberDto) {
-        return modelMapper.map(teamMemberDto, TeamMember.class);
     }
 
 }

@@ -30,6 +30,7 @@ public class EventService {
         return eventRepo.findAll();
     }
 
+    //TODO: @Res: Funktoniert diese Methode?
     public Optional<Event> findEventById(Long eventId) {
         return eventRepo.findById((eventId));
     }

@@ -34,7 +34,4 @@ public class ContactPerson extends AbstractPerson {
     public void addTeamMember(TeamMember teamMember) {
         teamMembers.add(teamMember);
     }
-
-    public void removeTeamMember(TeamMember teamMember) { teamMembers.remove(teamMember); }
-
 }

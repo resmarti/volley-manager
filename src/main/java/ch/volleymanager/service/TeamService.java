@@ -5,6 +5,7 @@ import ch.volleymanager.domain.Event;
 import ch.volleymanager.domain.Team;
 import ch.volleymanager.domain.TeamMember;
 import ch.volleymanager.exception.TeamNotFoundException;
+import ch.volleymanager.exception.UserNotFoundException;
 import ch.volleymanager.repo.TeamRepo;
 import ch.volleymanager.resource.dto.TeamDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,6 @@ public class TeamService {
           teamRepo.deleteById(id);
     }
 
-
     public Team findTeamById(Long id) {
         return teamRepo.findById(id)
                 .orElseThrow(() -> new TeamNotFoundException("Team " + id + "konnte nicht gefunden werden"));
@@ -55,8 +55,5 @@ public class TeamService {
         event.getTeams().add(team);
         return team.getEvents();
     }
-
-
-
 }
 

@@ -23,11 +23,11 @@ public class EventResource {
         return new ResponseEntity<>(events, HttpStatus.OK);
     }
 
-    // TODO: findEventById implementation
+    // TODO: @Res: is it working?
     @GetMapping("/find/{id}")
     public ResponseEntity<Event> findEventById(@PathVariable("id") Long id) {
-        List <Event> events = eventService.findEventById(id);
-        return new ResponseEntity<Event>((Event) events, HttpStatus.OK);
+        Optional<Event> events = eventService.findEventById(id);
+        return new ResponseEntity<Event>(HttpStatus.OK);
     }
 
 
@@ -49,9 +49,4 @@ public class EventResource {
         return new ResponseEntity<>(updateEvent, HttpStatus.OK);
     }
 
-   /* @GetMapping("/removeTeamMemberFromEvent/{id}")
-    public ResponseEntity<?>removeTeamMemberFromEvent(@PathVariable("eventId")Long eventId){
-        eventService.;
-    }
-*/
 }

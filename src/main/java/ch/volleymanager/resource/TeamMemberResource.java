@@ -70,13 +70,17 @@ public class TeamMemberResource {
         return new ResponseEntity<>(newTeammember, HttpStatus.CREATED);
     }
 
-
-
-/*    @DeleteMapping("/delete1/{id}")
-    public ResponseEntity<?> deleteTeamMember1(@PathVariable("id")Long id){
-        teamMemberService.deleteTeamMember1();
-        return new ResponseEntity<>(HttpStatus.OK);
+    @GetMapping("/removeTeamMemberFromEvent/{id}")
+    public ResponseEntity<?>removeTeamMemberFromEvent(@PathVariable("eventId")Long eventId, @PathVariable("teammemberid")Long teammemberid){
+        Set <Event> newEvent = teamMemberService.removeTeamMemberFromEvent(teammemberid, eventId);
+        return new ResponseEntity<>(newEvent, HttpStatus.OK);
     }
-    */
+
+    @DeleteMapping("/deleteTeamMember/{temmemberid}")
+    public ResponseEntity<?> deleteTeamMember(@PathVariable("teammemberid")Long teammemberid){
+        teamMemberService.deleteTeamMember(teammemberid);
+        return new ResponseEntity<>(HttpStatus.OK);
+            }
+
 
 }
