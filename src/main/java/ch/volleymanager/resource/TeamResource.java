@@ -2,7 +2,6 @@ package ch.volleymanager.resource;
 
 import ch.volleymanager.domain.Event;
 import ch.volleymanager.domain.Team;
-import ch.volleymanager.domain.TeamMember;
 import ch.volleymanager.service.TeamService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,10 +25,11 @@ public class TeamResource {
     }
 
     @GetMapping("/find/{id}")
-    public ResponseEntity<Team> getTeamById(@PathVariable("id") Long id) {
+    public ResponseEntity<Team> findTeamById(@PathVariable("id") Long id) {
         Team team = teamService.findTeamById(id);
         return new ResponseEntity<>(team, HttpStatus.OK);
     }
+
 
     @PostMapping("/add")
     public ResponseEntity<Team> addTeam(@RequestBody Team team) {
@@ -51,9 +51,10 @@ public class TeamResource {
 
     @PutMapping("/addTeamToEvent")
     public ResponseEntity<Team> addTeamToEvent(Long teamId, @RequestBody Event event) {
-
         teamService.addTeamToEvent(teamId, event);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
 
 }

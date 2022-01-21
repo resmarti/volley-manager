@@ -1,5 +1,6 @@
 package ch.volleymanager.resource;
 
+import ch.volleymanager.domain.Event;
 import ch.volleymanager.domain.Team;
 import ch.volleymanager.domain.TeamMember;
 import ch.volleymanager.resource.dto.TeamMemberDto;
@@ -50,18 +51,6 @@ public class TeamMemberResource {
         return new ResponseEntity<>(updateTeamMember, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteTeamMember(@PathVariable("id")Long id) {
-        teamMemberService.deleteTeamMember(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @DeleteMapping("/delete1/{id}")
-    public ResponseEntity<?> deleteTeamMember1(@PathVariable("id")Long id){
-        teamMemberService.deleteTeamMember1();
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
     @DeleteMapping("/removeteammemberfromteam/{teamid}/{teammemberid}")
     public ResponseEntity<?> removeTeamMemberFromTeam (@PathVariable("teamid")Long teamid, @PathVariable("teammemberid") Long teammemberid){
         teamMemberService.removeTeamMemberFromTeam(teamid, teammemberid);
@@ -73,6 +62,25 @@ public class TeamMemberResource {
         Set<Team> newTeamMember = teamMemberService.addTeamMemberToTeam(teammemberid, teamid);
         return new ResponseEntity<>(newTeamMember, HttpStatus.CREATED);
     }
+
+    //TODO: addTeammemberToEvent test
+    @PutMapping("/addteammembertoevent/{teammemberid}/{eventid}")
+    public ResponseEntity <Set<Event>> addTeamMemberToEvent(@PathVariable("teammemberid") Long teammemberid, @PathVariable("eventid") Long eventid){
+        Set <Event> newTeammember = teamMemberService.addTeamMemberToEvent(teammemberid, eventid);
+        return new ResponseEntity<>(newTeammember, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/removeTeamMemberFromEvent/{id}")
+    public ResponseEntity<?>removeTeamMemberFromEvent(@PathVariable("eventId")Long eventId, @PathVariable("teammemberid")Long teammemberid){
+        Set <Event> newEvent = teamMemberService.removeTeamMemberFromEvent(teammemberid, eventId);
+        return new ResponseEntity<>(newEvent, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/deleteTeamMember/{temmemberid}")
+    public ResponseEntity<?> deleteTeamMember(@PathVariable("teammemberid")Long teammemberid){
+        teamMemberService.deleteTeamMember(teammemberid);
+        return new ResponseEntity<>(HttpStatus.OK);
+            }
 
 
 }

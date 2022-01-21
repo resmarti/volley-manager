@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/contactperson")
+
 public class ContactPersonResource {
     private final ContactPersonService contactPersonService;
 
@@ -41,4 +42,10 @@ public class ContactPersonResource {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @DeleteMapping("/delete")
+    public ResponseEntity<?>deleteContactPersonById(@PathVariable("id")Long contactpersonid){
+        contactPersonService.deleteContactPersonById(contactpersonid);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    
 }

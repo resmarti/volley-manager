@@ -1,6 +1,9 @@
 package ch.volleymanager.service;
 import ch.volleymanager.domain.ContactPerson;
 import ch.volleymanager.domain.TeamMember;
+import ch.volleymanager.exception.TeamNotFoundException;
+import ch.volleymanager.exception.UserCanNotBeDeleted;
+import ch.volleymanager.repo.TeamMemberRepo;
 import ch.volleymanager.exception.ContactPersonNotDeletable;
 import ch.volleymanager.exception.UserNotFoundException;
 import ch.volleymanager.repo.ContactPersonRepo;
@@ -12,6 +15,9 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -98,5 +104,39 @@ public class ContactPersonService {
     private ContactPerson convertToEntity(ContactPersonDto contactPersonDto) {
         return modelMapper.map(contactPersonDto, ContactPerson.class);
     }
+
+    public ContactPerson findContactPersonById(Long id){
+        return contactPersonRepo.findById(id)
+                .orElseThrow(() -> new TeamNotFoundException("Team " + id + "konnte nicht gefunden werden"));
+    }
+
+
+ /*   public void removeContactPersonFromMember(Long teammemberid, long contactpersonid) {
+        ContactPerson contactPerson = findContactPersonById(contactpersonid);
+        Long teammemberId = contactPerson.getId();
+        TeamMember teamMember = findContactPersonById(contactpersonid);
+        List<ContactPerson> foundContactPerson = teamMember.getTeamMembers().stream()
+                .fiter(member -> Objects.equals(member.getId(), memberId))
+                .collection(Collectors.toList());
+        if(foundContactPerson.size()>0){
+            Set<ContactPerson> contactpersons = teamMember.getContactPerson();
+            Set<TeamMember> teammembers = teamMember.getTeamMember();
+            teammembers = teammembers.stream()
+                    .filter(t -> !t.getTeamMemberId().equals(teamemberid))
+                    .collect(Collectors.toSet());
+
+            contactPerson.setTeamMembers(teammembers);
+            teamMember.setContacPerson(contactPerson);
+
+            teamMemberRepo.save(teamMember);
+            teamMemberRepo.save(contactPerson);
+            return teammembers;
+        }
+        throw new UserCanNotBeDeleted();
+
+
+        }
+
+  */
 
 }
