@@ -6,11 +6,9 @@ import ch.volleymanager.domain.TeamMember;
 import ch.volleymanager.exception.TeamNotFoundException;
 import ch.volleymanager.repo.TeamRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +21,7 @@ public class TeamService {
     private final EventService eventService;
 
     @Autowired
-    public TeamService(TeamRepo teamRepo, TeamMemberService teamMemberService, EventService eventService) {
+    public TeamService(TeamRepo teamRepo, @Lazy TeamMemberService teamMemberService, @Lazy EventService eventService) {
         this.teamRepo = teamRepo;
         this.teamMemberService = teamMemberService;
         this.eventService = eventService;

@@ -33,7 +33,6 @@ public class EventResource {
         return new ResponseEntity<>(events, HttpStatus.OK);
     }
 
-
     @GetMapping("/add/{eventId}")
     public ResponseEntity<Event> addEvent(@RequestBody Event event) {
         Event newEvent = eventService.addEvent(event);
