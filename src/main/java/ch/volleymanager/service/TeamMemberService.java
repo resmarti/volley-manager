@@ -60,10 +60,13 @@ public class TeamMemberService implements HasLogger {
             //remove the contact Person if it exists
             if (teamMember.get().getContactPerson()!=null) {
                 ContactPerson contactPerson = teamMember.get().getContactPerson();
-                //contactPerson.removeTeamMember(teamMember.get());
-                teamMember.get().removeContactPerson();
+                contactPerson.removeTeamMember(teamMember.get());
                 teamMemberRepo.save(teamMember.get());
                 contactPersonRepo.save(contactPerson);
+                //Delete contactPerson if it is orphaned
+                if (contactPerson.getTeamMembers().size()==0) {
+                    contactPersonRepo.delete(contactPerson);
+                }
             }
             //remove all events if there are any connections
             Set<Event> events = teamMember.get().getEvents();

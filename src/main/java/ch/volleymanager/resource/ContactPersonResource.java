@@ -36,15 +36,15 @@ public class ContactPersonResource {
         return new ResponseEntity<>(newContactPerson, HttpStatus.CREATED);
     }
 
-    @PutMapping("/addexistingtoteammeber/{contactpersonid}/{teammemberid}")
+    @PutMapping("/addexistingtoteammember/{contactpersonid}/{teammemberid}")
     public ResponseEntity<?> assignExistingContactPersonToTeamMember(@PathVariable Long contactpersonid, @PathVariable("teammemberid") Long teammemberid) {
         contactPersonService.assignExistingContactPersonToTeamMember(contactpersonid, teammemberid);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<?>deleteContactPersonById(@PathVariable("id")Long contactpersonid){
-        contactPersonService.deleteContactPersonById(contactpersonid);
+    @DeleteMapping("/remove/{contactpersonid}/{teammemberid}")
+    public ResponseEntity<?>removeContactPersonById(@PathVariable("contactpersonid") Long contactpersonid, @PathVariable("teammemberid") Long teammemberid){
+        contactPersonService.removeContactPersonFromTeamMember(contactpersonid, teammemberid);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     

@@ -9,19 +9,17 @@ import ch.volleymanager.exception.UserNotFoundException;
 import ch.volleymanager.repo.ContactPersonRepo;
 import ch.volleymanager.repo.TeamMemberRepo;
 import ch.volleymanager.resource.dto.ContactPersonDto;
+import ch.volleymanager.utils.HasLogger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class ContactPersonService {
+public class ContactPersonService implements HasLogger {
     private final ContactPersonRepo contactPersonRepo;
     private final TeamMemberRepo teamMemberRepo;
 
@@ -52,9 +50,9 @@ public class ContactPersonService {
         return contactPerson;
     }
 
-    public void assignExistingContactPersonToTeamMember(Long contactId, Long teamMemberId) {
+    public void assignExistingContactPersonToTeamMember(Long contactPersonId, Long teamMemberId) {
 
-        contactPersonRepo.findByIdWithEagerRelationships(contactId).ifPresent(contactPerson -> {
+        contactPersonRepo.findByIdWithEagerRelationships(contactPersonId).ifPresent(contactPerson -> {
             teamMemberRepo.findByIdWithEagerRelationships(teamMemberId).ifPresent(teamMember -> {
                 teamMember.setContactPerson(contactPerson);
                 contactPerson.addTeamMember(teamMember);
@@ -63,6 +61,20 @@ public class ContactPersonService {
             });
         });
 
+    }
+
+    public void removeContactPersonFromTeamMember(long contactPersonId, Long teamMemberId) {
+        contactPersonRepo.findByIdWithEagerRelationships(contactPersonId).ifPresent(contactPerson -> {
+            teamMemberRepo.findByIdWithEagerRelationships(teamMemberId).ifPresent(teamMember -> {
+                contactPerson.removeTeamMember(teamMember);
+                contactPersonRepo.save(contactPerson);
+                teamMemberRepo.save(teamMember);
+                //Delete contactPerson if it is orphaned
+                if (contactPerson.getTeamMembers().size()==0) {
+                    contactPersonRepo.delete(contactPerson);
+                }
+            });
+        });
     }
 
     //Todo: ContactPerson can only be deleted when no player is attached
