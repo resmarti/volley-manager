@@ -29,6 +29,11 @@ public class TeamMember extends AbstractPerson {
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
+    @LazyCollection (LazyCollectionOption.FALSE)
+    private Set<TeamMember> teamMembers = new HashSet<>();
+
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER)
     @LazyCollection(LazyCollectionOption.FALSE)
     private Set<Event> events = new HashSet<>();
 

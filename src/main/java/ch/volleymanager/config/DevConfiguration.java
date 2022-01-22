@@ -66,9 +66,9 @@ public class DevConfiguration implements HasLogger {
     }
 
     private void createPersonData() {
-        ContactPerson cpFelixMuster = new ContactPerson(null, "Felix", "Muster", "Bahnhofstrasse", "1", 5000, "Aarau", "mobile079", "email@test.ch");
-        ContactPerson cpMaxMusterMann = new ContactPerson(null, "Max", "Mustermann", "Alpenblick", "1", 3000, "Bern", "mobile079", "email@test.ch");
-        ContactPerson cpJohnDoe = new ContactPerson(null, "John", "Doe", "Lagerstrasse", "41", 8004, "Zürich", "mobile079", "email@test.ch");
+        ContactPerson cpFelixMuster = new ContactPerson(null, "Felix", "Muster", "Bahnhofstrasse", "1", 5000, "Aarau", "email@test.ch", "+4177 777 70 70");
+        ContactPerson cpMaxMusterMann = new ContactPerson(null, "Max", "Mustermann", "Alpenblick", "1", 3000, "Bern", "j.mustermann@gmail.com", "+4178 777 70 70");
+        ContactPerson cpJohnDoe = new ContactPerson(null, "John", "Doe", "Lagerstrasse", "41", 8004, "Zürich", "a.muster@gmx.net", "+4177 888 70 70");
 
         cpFelixMuster = contactPersonRepo.save(cpFelixMuster);
         cpMaxMusterMann = contactPersonRepo.save(cpMaxMusterMann);
@@ -98,25 +98,25 @@ public class DevConfiguration implements HasLogger {
 
     private void createTeamMemberData() {
 
-        TeamMember teamMemberAnnaMuster14Years = new TeamMember(null, "Anna", "Muster", "Bahnhofstrasse", "1", 5000, "Aarau", "mobile079", "email@test.ch",  LocalDate.of(2008, 3, 3), "f", null, null, false, true);
+        TeamMember teamMemberAnnaMuster14Years = new TeamMember(null, "Anna", "Muster", "Bahnhofstrasse", "1", 5000, "Aarau", "email@test.ch", "+4177 777 70 70",  LocalDate.of(2008, 3, 3), "f", null, null, false, true);
         teamMemberAnnaMuster14Years = teamMemberRepo.save(teamMemberAnnaMuster14Years);
         teamMemberAnnaMuster14YearsId = teamMemberAnnaMuster14Years.getId();
 
-        TeamMember teamMemberJuliaMustermann14Years = new TeamMember(null, "Julia", "Mustermann", "Alpenblick", "1", 3000, "Bern", "mobile079", "email@test.ch",  LocalDate.of(2008, 4, 3), "f", null, null, false, true);
+        TeamMember teamMemberJuliaMustermann14Years = new TeamMember(null, "Julia", "Mustermann", "Alpenblick", "1", 3000, "Bern", "j.mustermann@gmail.com", "+4178 777 70 70",  LocalDate.of(2008, 4, 3), "f", null, null, false, true);
         teamMemberJuliaMustermann14Years = teamMemberRepo.save(teamMemberJuliaMustermann14Years);
         teamMemberJuliaMustermann14YearsId = teamMemberJuliaMustermann14Years.getId();
 
-        TeamMember teamMemberJennyDoe14Years = new TeamMember(null, "Anna", "Muster", "Lagerstrasse", "41", 8004, "Zürich", "mobile079", "email@test.ch", LocalDate.of(2008, 5, 3), "f", null, null, false, true);
+        TeamMember teamMemberJennyDoe14Years = new TeamMember(null, "Anna", "Muster", "Lagerstrasse", "41", 8004, "Zürich", "a.muster@gmx.net", "+4177 888 70 70", LocalDate.of(2008, 5, 3), "f", null, null, false, true);
         teamMemberJennyDoe14Years = teamMemberRepo.save(teamMemberJennyDoe14Years);
         teamMemberJennyDoe14YearsId = teamMemberJennyDoe14Years.getId();
     }
 
     private void createEventData() {
-        Event eventTournamentFebruary = new Event(null, "Februar Turnier", LocalDate.of(2022, 2, 12), "my Job", "Volley Ball Halle", 5, false, null, null);
+        Event eventTournamentFebruary = new Event(null, "Februar Turnier", LocalDate.of(2022, 2, 12), "Volley Ball Halle", 5, false, null, null);
         eventTournamentFebruary = eventRepo.save(eventTournamentFebruary);
         eventTurnierFebruarId = eventTournamentFebruary.getEventId();
 
-        Event eventTournamentMarch = new Event(null, "März Turnier", LocalDate.of(2022, 3, 15), "new Job", "Volley Ball Halle", 5, false, null, null);
+        Event eventTournamentMarch = new Event(null, "März Turnier", LocalDate.of(2022, 3, 15), "Volley Ball Halle", 5, false, null, null);
         eventTournamentMarch = eventRepo.save(eventTournamentMarch);
         eventTurnierMarchId = eventTournamentMarch.getEventId();
     }

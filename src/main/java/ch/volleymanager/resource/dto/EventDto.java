@@ -9,19 +9,17 @@ public class EventDto {
     private Long eventId;
     private String eventName;
     private LocalDate eventDate;
-    private String eventJob;
     private String eventLocation;
     private int numberOfHelpersNeeded;
     private boolean numberOfHelpersOK;
     private Set<TeamMemberDto> teamMembers;
     private Set<TeamDto> teams;
 
-    public EventDto(Long eventId, String eventName, LocalDate eventDate, String eventJob, String eventLocation, int numberOfHelpersNeeded,
+    public EventDto(Long eventId, String eventName, LocalDate eventDate, String eventLocation, int numberOfHelpersNeeded,
                  boolean numberOfHelpersOK, Set<TeamMemberDto> teamMembers, Set<TeamDto> teams) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.eventDate = eventDate;
-        this.eventJob = eventJob;
         this.eventLocation = eventLocation;
         this.numberOfHelpersNeeded = numberOfHelpersNeeded;
         this.numberOfHelpersOK = numberOfHelpersOK;
@@ -54,14 +52,6 @@ public class EventDto {
 
     public void setEventDate(LocalDate eventDate) {
         this.eventDate = eventDate;
-    }
-
-    public String getEventJob() {
-        return eventJob;
-    }
-
-    public void setEventJob(String eventJob) {
-        this.eventJob = eventJob;
     }
 
     public String getEventLocation() {
@@ -115,7 +105,6 @@ public class EventDto {
                 "Event ID=" + eventId +
                 ", Event Name='" + eventName + '\'' +
                 ", Event Datum ='" + eventDate + '\'' +
-                ", Event Job='" + eventJob + '\'' +
                 ", Event Location='" + eventLocation + '\'' +
                 '}';
     }

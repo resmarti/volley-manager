@@ -1,6 +1,8 @@
 package ch.volleymanager.resource;
 import ch.volleymanager.domain.Event;
+import ch.volleymanager.domain.Team;
 import ch.volleymanager.service.EventService;
+import ch.volleymanager.service.TeamService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +14,11 @@ import java.util.Set;
 
 public class EventResource {
     private final EventService eventService;
+    private final TeamService teamService;
 
-    public EventResource(EventService eventService) {
+    public EventResource(EventService eventService, TeamService teamService) {
         this.eventService = eventService;
+        this.teamService = teamService;
     }
 
     @GetMapping("/all")
@@ -23,13 +27,11 @@ public class EventResource {
         return new ResponseEntity<>(events, HttpStatus.OK);
     }
 
-    // TODO: @Res: is it working?
     @GetMapping("/find/{id}")
     public ResponseEntity<Event> findEventById(@PathVariable("id") Long id) {
-        Optional<Event> events = eventService.findEventById(id);
-        return new ResponseEntity<Event>(HttpStatus.OK);
+        Event events = eventService.findEventById(id);
+        return new ResponseEntity<>(events, HttpStatus.OK);
     }
-
 
     @GetMapping("/add/{eventId}")
     public ResponseEntity<Event> addEvent(@RequestBody Event event) {
@@ -37,7 +39,7 @@ public class EventResource {
         return new ResponseEntity<>(newEvent, HttpStatus.CREATED);
     }
 
-    @GetMapping("/delete")
+    @DeleteMapping("/delete")
     public ResponseEntity<?> deleteEvent(@PathVariable("eventId") Long eventId) {
         eventService.deleteEventById(eventId);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -47,6 +49,11 @@ public class EventResource {
     public ResponseEntity<Event> updateEvent(@RequestBody Event event) {
         Event updateEvent = eventService.updateEvent(event);
         return new ResponseEntity<>(updateEvent, HttpStatus.OK);
+    }
+    @PutMapping("/addTeamToEvent")
+    public ResponseEntity<Team> addTeamToEvent(Long teamId, @RequestBody Event event) {
+        eventService.addTeamToEvent(teamId, event);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

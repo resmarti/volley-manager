@@ -47,5 +47,5 @@ public class ContactPersonResource {
         contactPersonService.removeContactPersonFromTeamMember(contactpersonid, teammemberid);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    
-}
+
+  }

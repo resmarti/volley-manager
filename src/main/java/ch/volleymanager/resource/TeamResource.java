@@ -49,12 +49,4 @@ public class TeamResource {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/addTeamToEvent")
-    public ResponseEntity<Team> addTeamToEvent(Long teamId, @RequestBody Event event) {
-        teamService.addTeamToEvent(teamId, event);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-
-
 }

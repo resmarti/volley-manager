@@ -21,8 +21,6 @@ public class Event {
     private String eventName;
     @Column(name = "Event_date", nullable = false, updatable = true)
     private LocalDate eventDate;
-    @Column(name = "Aemtli", nullable = false, updatable = true)
-    private String eventJob;
     @Column(name = "Ort", nullable = false, updatable = true)
     private String eventLocation;
     @Column(name = "Number_of_helper", nullable = false, updatable = true)
@@ -41,12 +39,11 @@ public class Event {
     @LazyCollection (LazyCollectionOption.FALSE)
     private Set<Team> teams;
 
-    public Event(Long eventId, String eventName, LocalDate eventDate, String eventJob, String eventLocation, int numberOfHelpersNeeded,
+    public Event(Long eventId, String eventName, LocalDate eventDate, String eventLocation, int numberOfHelpersNeeded,
                  boolean numberOfHelpersOK, Set<TeamMember> teamMembers, Set<Team> teams) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.eventDate = eventDate;
-        this.eventJob = eventJob;
         this.eventLocation = eventLocation;
         this.numberOfHelpersNeeded = numberOfHelpersNeeded;
         this.numberOfHelpersOK = numberOfHelpersOK;
@@ -79,14 +76,6 @@ public class Event {
 
     public void setEventDate(LocalDate eventDate) {
         this.eventDate = eventDate;
-    }
-
-    public String getEventJob() {
-        return eventJob;
-    }
-
-    public void setEventJob(String eventJob) {
-        this.eventJob = eventJob;
     }
 
     public String getEventLocation() {
@@ -140,7 +129,6 @@ public class Event {
                 "Event ID=" + eventId +
                 ", Event Name='" + eventName + '\'' +
                 ", Event Datum ='" + eventDate + '\'' +
-                ", Event Job='" + eventJob + '\'' +
                 ", Event Location='" + eventLocation + '\'' +
                 '}';
     }

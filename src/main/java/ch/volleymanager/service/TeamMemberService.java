@@ -28,15 +28,19 @@ public class TeamMemberService implements HasLogger {
     private final TeamRepo teamRepo;
     private final EventRepo eventRepo;
     private final ContactPersonRepo contactPersonRepo;
+    private final TeamService teamService;
+    private final EventService eventService;
 
     @Autowired
     private ModelMapper modelMapper;
 
-    public TeamMemberService(TeamMemberRepo teammemberRepo, TeamRepo teamRepo, ContactPersonRepo contactPersonRepo, EventRepo eventRepo) {
+    public TeamMemberService(TeamMemberRepo teammemberRepo, TeamRepo teamRepo, ContactPersonRepo contactPersonRepo, EventRepo eventRepo, TeamService teamService, EventService eventService) {
         this.teamMemberRepo = teammemberRepo;
         this.teamRepo = teamRepo;
         this.eventRepo = eventRepo;
         this.contactPersonRepo = contactPersonRepo;
+        this.teamService = teamService;
+        this.eventService = eventService;
     }
 
     public TeamMember addTeamMember(TeamMember teammember) {
@@ -76,35 +80,15 @@ public class TeamMemberService implements HasLogger {
     }
 
 
-    //Delete TeamMember
-    /*public List<TeamMemberDto> deleteTeamMember1() {
-        List<TeamMember> teamMembers = teamMemberRepo.findAllWithEagerRelationships();
-        List<TeamMemberDto> teamMemberDtos = new ArrayList<>();
-        teamMembers.forEach(teamMember -> teamMemberDtos.remove(convertToDto(teamMember)));
-        return teamMemberDtos;
-    }
-    */
-
-
     public TeamMember findTeamMemberById(Long id) {
         return teamMemberRepo.findById(id)
-                .orElseThrow(() -> new UserNotFoundException());
-    }
-
-    public Team findTeamById(Long id) {
-        return teamRepo.findById(id)
-                .orElseThrow(() -> new TeamNotFoundException("Team " + id + "konnte nicht gefunden werden"));
-    }
-
-    public Event findEventById(Long id) {
-        return eventRepo.findById(id)
                 .orElseThrow(() -> new UserNotFoundException());
     }
 
     //Add team member to team with check of the maxAge in class Team
     public Set<Team> addTeamMemberToTeam(Long teammemberId, Long teamId) {
         TeamMember teamMember = findTeamMemberById(teammemberId);
-        Team team = findTeamById(teamId);
+        Team team = teamService.findTeamById(teamId);
 
         if (team.getMaxAge() >= teamMember.calculateAge()) {
             teamMember.getTeams().add(team);
@@ -122,7 +106,7 @@ public class TeamMemberService implements HasLogger {
     public void removeTeamMemberFromTeam(Long teamid, Long teammemberid) {
         TeamMember teamMember = findTeamMemberById(teammemberid);
         Long memberId = teamMember.getId();
-        Team team = findTeamById(teamid);
+        Team team = teamService.findTeamById(teamid);
         List<TeamMember> foundMembers = team.getTeammembers().stream()
                 .filter(member -> Objects.equals(member.getId(), memberId))
                 .collect(Collectors.toList());
@@ -151,7 +135,7 @@ public class TeamMemberService implements HasLogger {
     public Set<Event> removeTeamMemberFromEvent(Long eventid, Long teammemberid) {
         TeamMember teamMember = findTeamMemberById(teammemberid);
         Long memberId = teamMember.getId();
-        Event event = findEventById(eventid);
+        Event event = eventService.findEventById(eventid);
         List<TeamMember> foundMembers = event.getTeamMembers().stream()
                 .filter(member -> Objects.equals(member.getId(), memberId))
                 .collect(Collectors.toList());
@@ -179,7 +163,7 @@ public class TeamMemberService implements HasLogger {
 
     public Set<Event> addTeamMemberToEvent(Long teammemberid, Long eventid) {
         TeamMember teamMember = findTeamMemberById(teammemberid);
-        Event event = findEventById(eventid);
+        Event event = eventService.findEventById(eventid);
 
         teamMember.getEvents().add(event);
         event.getTeamMembers().add(teamMember);

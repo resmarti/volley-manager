@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 
+
 @Service
 @Transactional
 public class ContactPersonService implements HasLogger {
@@ -77,8 +78,8 @@ public class ContactPersonService implements HasLogger {
         });
     }
 
-    //Todo: ContactPerson can only be deleted when no player is attached
-    public void deleteContactPersonById(Long id) throws ContactPersonNotDeletable {
+
+    public void deleteContactPersonById(Long id) throws ContactPersonNotDeletable{
         ContactPerson contactPerson = contactPersonRepo.findById(id)
                 .orElseThrow(() -> new UserNotFoundException());
 
@@ -94,7 +95,7 @@ public class ContactPersonService implements HasLogger {
 
     }
 
-    public ContactPerson addContactPersonToMember(Long memberId, boolean shouldUseTheSameAddress) {
+    public ContactPerson assignContactPersonToMember(Long memberId, boolean shouldUseTheSameAddress) {
         TeamMember teamMember = teamMemberRepo.findById(memberId).orElseThrow(() -> new UserNotFoundException());
 
         ContactPerson contactPerson = new ContactPerson();
@@ -122,33 +123,13 @@ public class ContactPersonService implements HasLogger {
                 .orElseThrow(() -> new TeamNotFoundException("Team " + id + "konnte nicht gefunden werden"));
     }
 
-
- /*   public void removeContactPersonFromMember(Long teammemberid, long contactpersonid) {
-        ContactPerson contactPerson = findContactPersonById(contactpersonid);
-        Long teammemberId = contactPerson.getId();
-        TeamMember teamMember = findContactPersonById(contactpersonid);
-        List<ContactPerson> foundContactPerson = teamMember.getTeamMembers().stream()
-                .fiter(member -> Objects.equals(member.getId(), memberId))
-                .collection(Collectors.toList());
-        if(foundContactPerson.size()>0){
-            Set<ContactPerson> contactpersons = teamMember.getContactPerson();
-            Set<TeamMember> teammembers = teamMember.getTeamMember();
-            teammembers = teammembers.stream()
-                    .filter(t -> !t.getTeamMemberId().equals(teamemberid))
-                    .collect(Collectors.toSet());
-
-            contactPerson.setTeamMembers(teammembers);
-            teamMember.setContacPerson(contactPerson);
-
-            teamMemberRepo.save(teamMember);
-            teamMemberRepo.save(contactPerson);
-            return teammembers;
-        }
-        throw new UserCanNotBeDeleted();
-
-
-        }
-
-  */
+    public TeamMember findTeamMemberById(Long id) {
+        return teamMemberRepo.findById(id)
+                .orElseThrow(() -> new UserNotFoundException());
+    }
 
 }
+
+
+
+
