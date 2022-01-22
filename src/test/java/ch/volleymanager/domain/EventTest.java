@@ -46,8 +46,8 @@ public class EventTest {
         )
         );
 
-        String temp = "Event{id=2, LocalDate=2022-06-01, Auswärtsspiel Lunki, 8918 Oberlunkhofen}";
-        assertThat(temp).isEqualTo(e.toString());
+        String temp = "Event{Event ID=1, Event Name='Auswärtsspiel Lunki', Event Datum ='2022-06-01', Event Location='Turnhalle Dorf, 8918 Oberlunkhofen'}";
+        assertThat(e.toString()).isEqualTo(temp);
 
     }
 }
