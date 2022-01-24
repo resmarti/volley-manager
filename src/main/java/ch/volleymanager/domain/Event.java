@@ -11,36 +11,40 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "Event_Table")
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
     private Long eventId;
-    @Column(name = "Event_name", nullable = false, updatable = true)
+    @Column(nullable = false, updatable = true)
     private String eventName;
-    @Column(name = "Event_date", nullable = false, updatable = true)
+    @Column(nullable = false, updatable = true)
     private LocalDate eventDate;
-    @Column(name = "Ort", nullable = false, updatable = true)
+    @Column(nullable = false, updatable = true)
     private String eventLocation;
-    @Column(name = "Number_of_helper", nullable = false, updatable = true)
+    @Column(nullable = false, updatable = true)
     private int numberOfHelpersNeeded;
-    @Column(name = "Enough_helpers", nullable = false, updatable = true)
+    @Column(nullable = false, updatable = true)
     private boolean numberOfHelpersOK;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(joinColumns = @JoinColumn(), inverseJoinColumns = @JoinColumn)
-    @JsonIgnore
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private Set<TeamMember> teamMembers;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(joinColumns = @JoinColumn(), inverseJoinColumns =@JoinColumn)
+    @ManyToMany(mappedBy = "events", fetch = FetchType.EAGER)
     @JsonIgnore
     @LazyCollection (LazyCollectionOption.FALSE)
-    private Set<Team> teams;
+    private Set<TeamMember> teamMembers = new HashSet<>();
 
-    public Event(Long eventId, String eventName, LocalDate eventDate, String eventLocation, int numberOfHelpersNeeded,
-                 boolean numberOfHelpersOK, Set<TeamMember> teamMembers, Set<Team> teams) {
+    @ManyToMany(mappedBy = "events", fetch = FetchType.EAGER)
+    @JsonIgnore
+    @LazyCollection (LazyCollectionOption.FALSE)
+    private Set<Team> teams = new HashSet<>();
+
+    public Event(Long eventId,
+                 String eventName,
+                 LocalDate eventDate,
+                 String eventLocation,
+                 int numberOfHelpersNeeded,
+                 boolean numberOfHelpersOK,
+                 Set<TeamMember> teamMembers,
+                 Set<Team> teams) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.eventDate = eventDate;
@@ -107,12 +111,28 @@ public class Event {
         return this.eventDate.isBefore(LocalDate.now());
     }
 
+    public Set<TeamMember> getTeamMembersEager() {
+        return teamMembers;
+    }
+
+    public void setTeamMembersEager(Set<TeamMember> teamMembers) {
+        this.teamMembers = teamMembers;
+    }
+
     public Set<TeamMember> getTeamMembers() {
         return teamMembers;
     }
 
     public void setTeamMembers(Set<TeamMember> teamMembers) {
         this.teamMembers = teamMembers;
+    }
+
+    public Set<Team> getTeamsEager() {
+        return teams;
+    }
+
+    public void setTeamsEager(Set<Team> teams) {
+        this.teams = teams;
     }
 
     public Set<Team> getTeams() {

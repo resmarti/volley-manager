@@ -1,6 +1,5 @@
 package ch.volleymanager.resource;
 
-import ch.volleymanager.domain.Event;
 import ch.volleymanager.domain.Team;
 import ch.volleymanager.service.TeamService;
 import org.springframework.http.HttpStatus;

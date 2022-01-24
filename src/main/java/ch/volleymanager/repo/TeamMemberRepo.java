@@ -1,5 +1,5 @@
 package ch.volleymanager.repo;
-import ch.volleymanager.domain.ContactPerson;
+
 import ch.volleymanager.domain.TeamMember;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
