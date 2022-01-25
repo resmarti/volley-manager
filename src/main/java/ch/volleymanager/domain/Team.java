@@ -73,11 +73,19 @@ public class Team {
         this.events = events;
     }
 
-    public Set<TeamMember> getTeammembers() {
+    public Set<TeamMember> getTeamMembersEager() {
         return teamMembers;
     }
 
-    public void setTeammembers(Set<TeamMember> teamMembers) {
+    public void setTeamMembersEager(Set<TeamMember> teamMembers) {
+        this.teamMembers = teamMembers;
+    }
+
+    public Set<TeamMember> getTeamMembers() {
+        return teamMembers;
+    }
+
+    public void setTeamMembers(Set<TeamMember> teamMembers) {
         this.teamMembers = teamMembers;
     }
 

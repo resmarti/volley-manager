@@ -49,7 +49,7 @@ public class TeamService {
         Optional<Team> team = teamRepo.findByIdWithEagerRelationships(id);
         if(team.isPresent()) {
             //remove from each Team that they belong to
-            Set<TeamMember> teamMembers = team.get().getTeammembers();
+            Set<TeamMember> teamMembers = team.get().getTeamMembers();
             teamMembers.forEach(teamMember -> teamMemberService.removeTeamMemberFromTeam(team.get().getTeamId(), teamMember.getId()));
             //remove all events if there are any connections
             Set<Event> events = team.get().getEvents();

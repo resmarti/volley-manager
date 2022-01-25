@@ -92,7 +92,7 @@ public class TeamMemberService implements HasLogger {
 
         if (team.getMaxAge() >= teamMember.calculateAge()) {
             teamMember.getTeams().add(team);
-            team.getTeammembers().add(teamMember);
+            team.getTeamMembers().add(teamMember);
             teamMemberRepo.save(teamMember);
             teamRepo.save(team);
         } else {
@@ -107,12 +107,12 @@ public class TeamMemberService implements HasLogger {
         TeamMember teamMember = findTeamMemberById(teammemberid);
         Long memberId = teamMember.getId();
         Team team = teamService.findTeamById(teamid);
-        List<TeamMember> foundMembers = team.getTeammembers().stream()
+        List<TeamMember> foundMembers = team.getTeamMembers().stream()
                 .filter(member -> Objects.equals(member.getId(), memberId))
                 .collect(Collectors.toList());
         if (foundMembers.size() > 0) {
 
-            Set<TeamMember> members = team.getTeammembers();
+            Set<TeamMember> members = team.getTeamMembers();
             members = members.stream()
                     .filter(member -> !member.getId().equals(memberId))
                     .collect(Collectors.toSet());
@@ -122,7 +122,7 @@ public class TeamMemberService implements HasLogger {
                     .filter(t -> !t.getTeamId().equals(teamid))
                     .collect(Collectors.toSet());
 
-            team.setTeammembers(members);
+            team.setTeamMembers(members);
             teamMember.setTeams(teams);
 
             teamMemberRepo.save(teamMember);
