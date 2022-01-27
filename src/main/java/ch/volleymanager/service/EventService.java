@@ -53,9 +53,14 @@ public class EventService {
     }
 
     public void deleteEventById(Long eventid) throws EventNotDeletable {
-        Event event = eventRepo.findById(eventid)
-                .orElseThrow(() -> new EventNotDeletable("Der Event mit der ID " + eventid + "kann nicht gelöscht werden."));
-        if(event.getEventValid()) {
+        Optional<Event> event = eventRepo.findById(eventid);
+        if(event.isPresent()) {
+            //remove from each team that is connect to event
+            Set<Team> teams = event.get().getTeams();
+            teams.forEach(team -> this.removeTeamFromEvent(team.getTeamId(), event.get().getEventId()));
+            //remove from each teammember that is connect to event
+            Set<TeamMember> teammembers = event.get().getTeamMembers();
+            teammembers.forEach(teammember -> this.removeTeammemberFromEvent(teammember.getId(), event.get().getEventId()));
             eventRepo.deleteById(eventid);
         }
     }
