@@ -16,13 +16,8 @@ public interface EventRepo extends JpaRepository<Event, Long> {
     @Query("select e from Event e left join fetch e.teamMembers left join fetch e.teams where e.eventId =:id")
     Optional<Event> findByIdWithEagerRelationships(@Param("id") Long id);
 
-    @Query ("select e from Event e left join e.teamMembers where e.eventId=:id")
-    List<Event> findAllWithEagerRelationships();
-
     @Query (value ="select e from Event e left join fetch e.teamMembers",
     countQuery = "select count(teamMembers) from TeamMember teammembers")
     Page<Event> findAllWithEagerRelationships(Pageable page);
 
-    @Query("select e from Event e where e.eventId =: id")
-    List<Event> findEventByEventName(String eventName);
 }
