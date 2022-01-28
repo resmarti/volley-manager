@@ -57,7 +57,7 @@ public class VolleyManagerApplication {
         return new OpenAPI()
                 .addServersItem(new Server().url(contextPath))
                 .components(new Components())
-                .info(new Info().title("API for Todo App").version(appVersion)
+                .info(new Info().title("API for Volley Manager App").version(appVersion)
                         .license(new License().name("Apache 2.0").url("http://springdoc.org")));
     }
 
