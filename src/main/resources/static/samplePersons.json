@@ -1,0 +1,37 @@
+{
+  "persons": [
+    {
+      "vorname": "Res",
+      "nachname":"Marti",
+      "geburtsdatum":  "15.8.1990",
+      "email": "res@gmail.com",
+      "mobil": "+41 78 374 64 34",
+      "spieler":  true,
+      "trainer":  false,
+      "admin": false,
+      "imageUrl": "blablabla"
+    },
+    {
+      "vorname": "Karin",
+      "nachname":"Tommer",
+      "geburtsdatum":  "17.5.1982",
+      "email": "karin@gmail.com",
+      "mobil": "+41 78 374 64 35",
+      "spieler":  true,
+      "trainer":  true,
+      "admin": false,
+      "imageUrl": "blablabla"
+    },
+    {
+      "vorname": "Daniel",
+      "nachname":"Tschanz",
+      "geburtsdatum":  "1.5.1956",
+      "email": "daniel@gmail.com",
+      "mobil": "+41 78 374 64 36",
+      "spieler":  false,
+      "trainer":  false,
+      "admin": true,
+      "imageUrl": "blablabla"
+    }
+  ]
+}
