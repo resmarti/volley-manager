@@ -15,6 +15,8 @@ public class EventTest {
         e.setEventDate(LocalDate.of(2022,06,01));
         e.setEventName("Auswärtsspiel Lunki");
         e.setEventLocation("Turnhalle Dorf, 8918 Oberlunkhofen");
+        e.setNumberOfHelpersNeeded(10);
+        e.setNumberOfHelpersOK(false);
 
         e.addTeamMember(
                 new TeamMember(

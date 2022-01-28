@@ -20,17 +20,37 @@ public class TeamMemberTest {
     tm.setTeams(teams);
     tm.setEvents(events);
     //tm.setContactPerson(ContactPersonTest contactPersonTest);
-
-
-
-
-
-
-
-}
-
-
-
+        tm.addTeam(
+                new Team(
+                null,
+                15,
+                "U15 Juniorinnen",
+                Collections.emptySet(),
+                Collections.emptySet()
+                )
+        );
+        tm.addTeam(
+                new Team(
+                null,
+                13,
+                "U13 Juniorinnen",
+                Collections.emptySet(),
+                Collections.emptySet()
+                )
+        );
+        tm.addEvent(
+                new Event(
+                        null,
+                        "Heimturnier",
+                        LocalDate.of(2022, 10, 10),
+                        "Kanti Halle, 5400 Baden",
+                        10,
+                        false,
+                        Collections.emptySet(),
+                        Collections.emptySet()
+                )
+        );
+    }
 }
 
 
