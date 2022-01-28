@@ -29,20 +29,6 @@ public class EventRepoTest extends AbstractTest {
     @Override
     @BeforeEach
     public void setUp(){
-        String jsonEvent = readResource(new ClassPathResource("event/Event.json"));
-        try{
-            newEvent = mapFromJson(jsonEvent, Event.class);
-           List<Event> events = eventRepo.findEventByEventName(newEvent.getEventName());
-           if(events.isEmpty()){
-            newEvent = eventRepo.save(newEvent);
-            eventId = newEvent.getEventId();
-           }else{
-               newEvent = events.get(0);
-               eventId = events.get(0).getEventId();
-           }
-        } catch (IOException e){
-            e.printStackTrace();
-        }
     }
 
     @AfterEach
@@ -51,11 +37,6 @@ public class EventRepoTest extends AbstractTest {
     @Test
     public void showAllAssignedTeams() throws Exception{
         List <Event> events = eventRepo.findAll();
-        assertTrue(events.size()>0);
-    }
-
-    @Test public void shouldHaveAtLeasOneEagerContact()throws Exception{
-        List<Event> events = eventRepo.findAllWithEagerRelationships();
         assertTrue(events.size()>0);
     }
 
