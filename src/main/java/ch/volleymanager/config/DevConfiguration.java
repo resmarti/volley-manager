@@ -155,19 +155,19 @@ public class DevConfiguration implements HasLogger {
 
     private void createPersonData() {
         //Paremeters ContactPerson --> A true pleaseure for every woke person
-        ContactPerson cpMaleOne = new ContactPerson(null, "Karim", "Berrada", "Chillerweg", "1", 8703, "Erlenbach", "mobile079", "email@test.ch");
-        ContactPerson cpMaleTwo = new ContactPerson(null, "Chen Lu", "Wang", "Alpenblick", "2", 3000, "Bern", "mobile079", "email@test.ch");
-        ContactPerson cpMaleThree = new ContactPerson(null, "Jari", "Mäkelä", "Gimmermehweg", "3", 5014, "Gretzenbach", "mobile079", "email@test.ch");
-        ContactPerson cpMaleFour = new ContactPerson(null, "Sekou", "Kanumba", "Stasigässlein", "4", 4104, "Oberwil", "mobile079", "email@test.ch");
-        ContactPerson cpMaleFive = new ContactPerson(null, "Hansruedi", "Hugetobler", "Selfiweg", "5", 7307, "Jenins", "mobile079", "email@test.ch");
-        ContactPerson cpFemaleOne = new ContactPerson(null, "Maleika", "Kimathi", "Lagerstrasse", "6", 8004, "Zürich", "mobile079", "email@test.ch");
-        ContactPerson cpFemaleTwo = new ContactPerson(null, "Lily Grace Victoria", "Moore", "Lagerstrasse", "7", 8004, "Zürich", "mobile079", "email@test.ch");
-        ContactPerson cpFemaleThree = new ContactPerson(null, "Hildur", "Thorisdottir", "Inselweg", "8", 8630, "Rüti", "mobile079", "email@test.ch");
-        ContactPerson cpFemaleFour = new ContactPerson(null, "Svenja", "Djokovic", "Melbourne Park", "9", 3001, "Melbourne", "mobile079", "email@test.ch");
-        ContactPerson cpFemaleFive = new ContactPerson(null, "Annegret", "Schneider", "Lagerstrasse", "10", 8004, "Zürich", "mobile079", "email@test.ch");
-        ContactPerson cpDiverseOne = new ContactPerson(null, "Elisa", "Barrymore", "Rue de Lausanne", "11", 1700, "Fribourg", "mobile079", "email@test.ch");
-        ContactPerson cpDiverseTwo = new ContactPerson(null, "Carole", "Bernard", "Rue du Lac", "12", 1200, "Genf", "mobile079", "email@test.ch");
-        ContactPerson cpDiverseThree = new ContactPerson(null, "Ye", "East", "Irringersteig", "13", 8004, "Zürich", "mobile079", "email@test.ch");
+        ContactPerson cpMaleOne = new ContactPerson(null, "Karim", "Berrada", "Chillerweg", "1", 8703, "Erlenbach", "email@test.ch", "41788347513");
+        ContactPerson cpMaleTwo = new ContactPerson(null, "Chen Lu", "Wang", "Alpenblick", "2", 3000, "Bern", "email@test.ch", "41788347513");
+        ContactPerson cpMaleThree = new ContactPerson(null, "Jari", "Mäkelä", "Gimmermehweg", "3", 5014, "Gretzenbach", "email@test.ch", "41788347513");
+        ContactPerson cpMaleFour = new ContactPerson(null, "Sekou", "Kanumba", "Stasigässlein", "4", 4104, "Oberwil", "email@test.ch", "41788347513");
+        ContactPerson cpMaleFive = new ContactPerson(null, "Hansruedi", "Hugetobler", "Selfiweg", "5", 7307, "Jenins", "email@test.ch", "41788347513");
+        ContactPerson cpFemaleOne = new ContactPerson(null, "Maleika", "Kimathi", "Lagerstrasse", "6", 8004, "Zürich", "email@test.ch", "41788347513");
+        ContactPerson cpFemaleTwo = new ContactPerson(null, "Lily Grace Victoria", "Moore", "Lagerstrasse", "7", 8004, "Zürich", "email@test.ch", "41788347513");
+        ContactPerson cpFemaleThree = new ContactPerson(null, "Hildur", "Thorisdottir", "Inselweg", "8", 8630, "Rüti", "email@test.ch", "41788347513");
+        ContactPerson cpFemaleFour = new ContactPerson(null, "Svenja", "Djokovic", "Melbourne Park", "9", 3001, "Melbourne", "email@test.ch", "41788347513");
+        ContactPerson cpFemaleFive = new ContactPerson(null, "Annegret", "Schneider", "Lagerstrasse", "10", 8004, "Zürich", "email@test.ch", "41788347513");
+        ContactPerson cpDiverseOne = new ContactPerson(null, "Elisa", "Barrymore", "Rue de Lausanne", "11", 1700, "Fribourg", "email@test.ch", "41788347513");
+        ContactPerson cpDiverseTwo = new ContactPerson(null, "Carole", "Bernard", "Rue du Lac", "12", 1200, "Genf", "email@test.ch", "41788347513");
+        ContactPerson cpDiverseThree = new ContactPerson(null, "Ye", "East", "Irringersteig", "13", 8004, "Zürich", "email@test.ch", "41788347513");
 
         cpMaleOne = contactPersonRepo.save(cpMaleOne);
         cpMaleTwo = contactPersonRepo.save(cpMaleTwo);
@@ -234,33 +234,26 @@ public class DevConfiguration implements HasLogger {
     private void createTeamMemberData() {
 
         //Creates some TeamMembers currently not assigned to team, freely adaptable
-        TeamMember teamMemberMaleOne14Years = new TeamMember(null, "Karim", "Berrada", "Chillerweg", "1", 8703, "Erlenbach", "mobile079", "email@test.ch",  LocalDate.of(2008, 3, 3), "m", null, null, false, true);
+        TeamMember teamMemberMaleOne14Years = new TeamMember(null, "Karim", "Berrada", "Chillerweg", "1", 8703, "Erlenbach", "email@test.ch", "41788347513",  LocalDate.of(2008, 3, 3), "m", null, null, false, true);
         teamMemberMaleOne14Years = teamMemberRepo.save(teamMemberMaleOne14Years);
         teamMemberMaleOne14YearsId = teamMemberMaleOne14Years.getId();
 
-        TeamMember teamMemberFemaleThree18Years = new TeamMember(null, "Hildur", "Thorisdottir", "Inselweg", "8", 8630, "Rüti","mobile079", "email@test.ch",  LocalDate.of(2008, 4, 3), "f", null, null, false, true);
+        TeamMember teamMemberFemaleThree18Years = new TeamMember(null, "Hildur", "Thorisdottir", "Inselweg", "8", 8630, "Rüti","email@test.ch", "41788347513",  LocalDate.of(2005, 4, 3), "f", null, null, false, true);
         teamMemberFemaleThree18Years = teamMemberRepo.save(teamMemberFemaleThree18Years);
         teamMemberFemaleThree18YearsId = teamMemberFemaleThree18Years.getId();
 
-        TeamMember teamMemberMaleFive80Years = new TeamMember(null, "Hansruedi", "Hugetobler", "Selfiweg", "5", 7307, "Jenins", "mobile079", "email@test.ch", LocalDate.of(1945, 5, 3), "f", null, null, false, true);
+        TeamMember teamMemberFemaleFour18Years = new TeamMember(null, "Maleika", "Kimathi", "Lagerstrasse", "6", 8004, "Zürich", "email@test.ch", "41788347513",  LocalDate.of(2005, 4, 3), "f", null, null, false, true);
+        teamMemberFemaleFour18Years = teamMemberRepo.save(teamMemberFemaleFour18Years);
+        teamMemberFemaleFour18YearsId = teamMemberFemaleFour18Years.getId();
+
+        TeamMember teamMemberFemaleFive35Years = new TeamMember(null, "Lily Grace Victoria", "Moore", "Lagerstrasse", "7", 8004, "Zürich", "email@test.ch", "41788347513",  LocalDate.of(2000, 4, 3), "f", null, null, true, true);
+        teamMemberFemaleFive35Years = teamMemberRepo.save(teamMemberFemaleFive35Years);
+        teamMemberFemaleFive35YearsId = teamMemberFemaleFive35Years.getId();
+
+        TeamMember teamMemberMaleFive80Years = new TeamMember(null, "Hansruedi", "Hugetobler", "Selfiweg", "5", 7307, "Jenins", "email@test.ch", "41788347513", LocalDate.of(1945, 5, 3), "f", null, null, false, true);
         teamMemberMaleFive80Years = teamMemberRepo.save(teamMemberMaleFive80Years);
         teamMemberMaleFive80YearsId = teamMemberMaleFive80Years.getId();
     }
-
-    ContactPerson cpMaleOne = new ContactPerson(null, "Karim", "Berrada", "Chillerweg", "1", 8703, "Erlenbach", "mobile079", "email@test.ch");
-    ContactPerson cpMaleTwo = new ContactPerson(null, "Chen Lu", "Wang", "Alpenblick", "2", 3000, "Bern", "mobile079", "email@test.ch");
-    ContactPerson cpMaleThree = new ContactPerson(null, "Jari", "Mäkelä", "Gimmermehweg", "3", 5014, "Gretzenbach", "mobile079", "email@test.ch");
-    ContactPerson cpMaleFour = new ContactPerson(null, "Sekou", "Kanumba", "Stasigässlein", "4", 4104, "Oberwil", "mobile079", "email@test.ch");
-    ContactPerson cpMaleFive = new ContactPerson(null, "Hansruedi", "Hugetobler", "Selfiweg", "5", 7307, "Jenins", "mobile079", "email@test.ch");
-    ContactPerson cpFemaleOne = new ContactPerson(null, "¨Maleika", "Kimathi", "Lagerstrasse", "6", 8004, "Zürich", "mobile079", "email@test.ch");
-    ContactPerson cpFemaleTwo = new ContactPerson(null, "¨Lily Grace Victoria", "Moore", "Lagerstrasse", "7", 8004, "Zürich", "mobile079", "email@test.ch");
-    ContactPerson cpFemaleThree = new ContactPerson(null, "Hildur", "Thorisdottir", "Inselweg", "8", 8630, "Rüti", "mobile079", "email@test.ch");
-    ContactPerson cpFemaleFour = new ContactPerson(null, "Svenja", "Djokovic", "Melbourne Park", "9", 3001, "Melbourne", "mobile079", "email@test.ch");
-    ContactPerson cpFemaleFive = new ContactPerson(null, "Annegret", "Schneider", "Lagerstrasse", "10", 8004, "Zürich", "mobile079", "email@test.ch");
-    ContactPerson cpDiverseOne = new ContactPerson(null, "Elisa", "Barrymore", "Rue de Lausanne", "11", 1700, "Fribourg", "mobile079", "email@test.ch");
-    ContactPerson cpDiverseTwo = new ContactPerson(null, "Carole", "Bernard", "Rue du Lac", "12", 1200, "Genf", "mobile079", "email@test.ch");
-    ContactPerson cpDiverseThree = new ContactPerson(null, "Ye", "East", "Irringersteig", "13", 8004, "Zürich", "mobile079", "email@test.ch");
-
 
     private void createEventData() {
         Event eventTournamentFebruary = new Event(null, "Februar Turnier", LocalDate.of(2022, 2, 12),"Volley Ball Halle", 5, false, null, null);
@@ -276,6 +269,7 @@ public class DevConfiguration implements HasLogger {
 
         assignContactPersonToTeamMember(MaleTwoId, teamMemberMaleOne14YearsId);
         assignContactPersonToTeamMember(FemaleFiveId, teamMemberFemaleThree18YearsId);
+        assignContactPersonToTeamMember(FemaleTwoId, teamMemberFemaleFour18YearsId);
         assignContactPersonToTeamMember(FemaleFiveId, teamMemberMaleFive80YearsId);
 
     }
