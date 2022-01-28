@@ -25,7 +25,7 @@ public class EventResourceTest extends AbstractTest{
 
     @Test
     public void shouldGetTeamMemberListEager() throws Exception{
-        String url = "/event/all-eager";
+        String url = "/event/all";
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(url)
                 .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 

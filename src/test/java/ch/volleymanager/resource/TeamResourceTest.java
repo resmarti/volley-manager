@@ -25,7 +25,7 @@ public class TeamResourceTest extends AbstractTest {
 
     @Test
     public void shouldGetTeamListEager() throws Exception{
-        String uri = "/team/all-eager";
+        String uri = "/team/all";
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
                 .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 
